@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Toolbelt.Blazor.HttpClientInterceptor
+namespace Toolbelt.Blazor
 {
     public class HttpClientInterceptor : HttpMessageHandler
     {

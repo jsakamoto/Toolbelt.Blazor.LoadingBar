@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,7 +13,7 @@ namespace Toolbelt.Blazor.LoadingBar.Sample.Client
 
         public void Configure(IBlazorApplicationBuilder app)
         {
-            app.UseHttpClientInterceptor();
+            app.UseLoadingBar();
 
             app.AddComponent<App>("app");
         }

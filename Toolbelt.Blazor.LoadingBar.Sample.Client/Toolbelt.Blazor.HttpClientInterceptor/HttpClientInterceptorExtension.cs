@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Toolbelt.Blazor.HttpClientInterceptor
+namespace Toolbelt.Blazor
 {
     public static class HttpClientInterceptorExtension
     {
@@ -14,10 +14,12 @@ namespace Toolbelt.Blazor.HttpClientInterceptor
             }
         }
 
-        public static void UseHttpClientInterceptor(this IBlazorApplicationBuilder app)
+        public static IBlazorApplicationBuilder UseHttpClientInterceptor(this IBlazorApplicationBuilder app)
         {
             var interceptor = app.Services.GetService<HttpClientInterceptor>();
             interceptor.Install(app);
+
+            return app;
         }
     }
 }

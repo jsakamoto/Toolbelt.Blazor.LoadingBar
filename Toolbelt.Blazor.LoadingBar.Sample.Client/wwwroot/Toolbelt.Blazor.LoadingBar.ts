@@ -20,6 +20,14 @@
             });
         }
 
+        public beforeSend(): void {
+            console.log(`BEFORE SEND`);
+        }
+
+        public afterSend(): void {
+            console.log(`AFTER SEND`);
+        }
+
         public setWidth(pct: number): void {
             this.loadingBar.style.width = pct + '%';
             this.loadingBarContainer.className = 'active';

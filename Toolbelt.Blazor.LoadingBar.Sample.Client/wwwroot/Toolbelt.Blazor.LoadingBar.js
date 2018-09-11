@@ -15,6 +15,12 @@ var Toolbelt;
                     }
                 });
             }
+            LoadingBar.prototype.beforeSend = function () {
+                console.log("BEFORE SEND");
+            };
+            LoadingBar.prototype.afterSend = function () {
+                console.log("AFTER SEND");
+            };
             LoadingBar.prototype.setWidth = function (pct) {
                 this.loadingBar.style.width = pct + '%';
                 this.loadingBarContainer.className = 'active';
