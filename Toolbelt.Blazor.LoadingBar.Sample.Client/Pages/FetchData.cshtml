@@ -1,6 +1,8 @@
 ﻿@using Toolbelt.Blazor.LoadingBar.Sample.Shared
 @page "/fetchdata"
+@implements IDisposable
 @inject HttpClient Http
+@inject HttpClientInterceptor Interceptor
 
 <h1>Weather forecast</h1>
 
@@ -40,6 +42,24 @@ else
 
     protected override async Task OnInitAsync()
     {
+        this.Interceptor.BeforeSend += OnBeforeSend;
+        this.Interceptor.AfterSend += OnAfterSend;
         forecasts = await Http.GetJsonAsync<WeatherForecast[]>("api/SampleData/WeatherForecasts");
+    }
+
+    private void OnBeforeSend(object sender, EventArgs args)
+    {
+        Console.WriteLine("OnBeforeSend");
+    }
+
+    private void OnAfterSend(object sender, EventArgs args)
+    {
+        Console.WriteLine("OnAfterSend");
+    }
+
+    public void Dispose()
+    {
+        this.Interceptor.BeforeSend -= OnBeforeSend;
+        this.Interceptor.AfterSend -= OnAfterSend;
     }
 }

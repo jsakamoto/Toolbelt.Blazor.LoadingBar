@@ -4,7 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <LangVersion>7.3</LangVersion>
+    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Toolbelt.Blazor.LoadingBar.ts" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.5.1" />
@@ -13,6 +18,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Toolbelt.Blazor.LoadingBar.Sample.Shared\Toolbelt.Blazor.LoadingBar.Sample.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\Toolbelt.Blazor.LoadingBar.ts" />
   </ItemGroup>
 
 </Project>

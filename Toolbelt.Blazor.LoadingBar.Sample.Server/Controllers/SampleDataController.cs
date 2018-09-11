@@ -1,9 +1,9 @@
-﻿using Toolbelt.Blazor.LoadingBar.Sample.Shared;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Toolbelt.Blazor.LoadingBar.Sample.Shared;
 
 namespace Toolbelt.Blazor.LoadingBar.Sample.Server.Controllers
 {
@@ -16,8 +16,10 @@ namespace Toolbelt.Blazor.LoadingBar.Sample.Server.Controllers
         };
 
         [HttpGet("[action]")]
-        public IEnumerable<WeatherForecast> WeatherForecasts()
+        public async Task<IEnumerable<WeatherForecast>> WeatherForecasts()
         {
+            await Task.Delay(3000);
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

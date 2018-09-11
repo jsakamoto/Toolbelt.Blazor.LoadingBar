@@ -7,10 +7,13 @@ namespace Toolbelt.Blazor.LoadingBar.Sample.Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClientInterceptor();
         }
 
         public void Configure(IBlazorApplicationBuilder app)
         {
+            app.UseHttpClientInterceptor();
+
             app.AddComponent<App>("app");
         }
     }
