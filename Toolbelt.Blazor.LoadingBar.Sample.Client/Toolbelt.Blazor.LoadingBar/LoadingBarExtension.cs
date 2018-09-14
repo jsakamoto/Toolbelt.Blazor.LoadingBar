@@ -25,12 +25,12 @@ namespace Toolbelt.Blazor
 
         private static void Interceptor_BeforeSend(object sender, EventArgs e)
         {
-            JSRuntime.Current?.InvokeAsync<object>("Toolbelt.Blazor.loadingBar.beforeSend");
+            JSRuntime.Current?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.beforeSend()");
         }
 
         private static void Interceptor_AfterSend(object sender, EventArgs e)
         {
-            JSRuntime.Current?.InvokeAsync<object>("Toolbelt.Blazor.loadingBar.afterSend");
+            JSRuntime.Current?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.afterSend()");
         }
     }
 }
