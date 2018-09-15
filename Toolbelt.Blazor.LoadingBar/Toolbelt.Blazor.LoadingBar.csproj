@@ -8,6 +8,17 @@
     <LangVersion>7.3</LangVersion>
     <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
     <RootNamespace>Toolbelt.Blazor</RootNamespace>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
+    <Copyright>Copyright © 2018 J.Sakamoto, Mozilla Public License 2.0</Copyright>
+    <Authors>J.Sakamoto</Authors>
+    <PackageLicenseUrl>https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/</PackageProjectUrl>
+    <Description>Insert loading bar UI automatically into a client side Blazor application.</Description>
+    <PackageTags>blazor,loading,loadingbar,loading-bar</PackageTags>
+    <PackageReleaseNotes>v.1.0.0
+- 1st release.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +26,10 @@
     <EmbeddedResource Include="content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Properties\launchSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +41,10 @@
     <None Remove="content\style.css" />
     <None Remove="content\Toolbelt.Blazor.LoadingBar.js" />
     <None Remove="content\Toolbelt.Blazor.LoadingBar.js.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Properties\launchSettings.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -50,7 +69,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+  <PropertyGroup>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
     <TypeScriptModuleKind>None</TypeScriptModuleKind>
