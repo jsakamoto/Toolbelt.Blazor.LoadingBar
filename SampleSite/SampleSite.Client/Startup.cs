@@ -1,8 +1,9 @@
 using System;
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Toolbelt.Blazor;
 
-namespace Toolbelt.Blazor.LoadingBar.Sample.Client
+namespace SampleSite.Client
 {
     public class Startup
     {

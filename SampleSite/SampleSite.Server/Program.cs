@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace Toolbelt.Blazor.LoadingBar.Sample.Server
+namespace SampleSite.Server
 {
     public class Program
     {

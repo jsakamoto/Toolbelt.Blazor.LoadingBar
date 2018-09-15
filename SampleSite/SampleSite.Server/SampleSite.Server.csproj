@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Toolbelt.Blazor.LoadingBar.Sample.Client\Toolbelt.Blazor.LoadingBar.Sample.Client.csproj" />
-    <ProjectReference Include="..\Toolbelt.Blazor.LoadingBar.Sample.Shared\Toolbelt.Blazor.LoadingBar.Sample.Shared.csproj" />
+    <ProjectReference Include="..\SampleSite.Client\SampleSite.Client.csproj" />
+    <ProjectReference Include="..\SampleSite.Shared\SampleSite.Shared.csproj" />
   </ItemGroup>
 
 </Project>

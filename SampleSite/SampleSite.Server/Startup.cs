@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Blazor.Server;
+﻿using System.Linq;
+using System.Net.Mime;
+using Microsoft.AspNetCore.Blazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
-using System.Linq;
-using System.Net.Mime;
 
-namespace Toolbelt.Blazor.LoadingBar.Sample.Server
+namespace SampleSite.Server
 {
     public class Startup
     {

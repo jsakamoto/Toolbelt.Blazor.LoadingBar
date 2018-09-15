@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Toolbelt.Blazor.LoadingBar.Sample.Shared
+namespace SampleSite.Shared
 {
     public class WeatherForecast
     {

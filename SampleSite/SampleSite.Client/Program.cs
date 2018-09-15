@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor.Hosting;
 
-namespace Toolbelt.Blazor.LoadingBar.Sample.Client
+namespace SampleSite.Client
 {
     public class Program
     {
