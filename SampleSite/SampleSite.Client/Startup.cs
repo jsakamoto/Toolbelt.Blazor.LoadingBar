@@ -9,7 +9,7 @@ namespace SampleSite.Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClientInterceptor();
+            services.AddLoadingBar();
         }
 
         public void Configure(IBlazorApplicationBuilder app)

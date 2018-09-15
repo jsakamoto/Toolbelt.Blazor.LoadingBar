@@ -23,7 +23,7 @@ var Toolbelt;
                     this.loadingBar = this.loadingBarContainer.getElementsByClassName('bar')[0];
                 }
             };
-            LoadingBarClass.prototype.beforeSend = function () {
+            LoadingBarClass.prototype.beginLoading = function () {
                 var _this = this;
                 if (this.reqsTotal === 0) {
                     this.setTimeout(this.startTimer, function () { return _this.start(); }, this.latencyThreshold);
@@ -31,7 +31,7 @@ var Toolbelt;
                 this.reqsTotal++;
                 this.setProgress(this.reqsCompleted / this.reqsTotal);
             };
-            LoadingBarClass.prototype.afterSend = function () {
+            LoadingBarClass.prototype.endLoading = function () {
                 this.reqsCompleted++;
                 if (this.reqsCompleted >= this.reqsTotal) {
                     this.complete();

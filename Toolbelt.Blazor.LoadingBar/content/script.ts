@@ -41,7 +41,7 @@
             }
         }
 
-        public beforeSend(): void {
+        public beginLoading(): void {
             if (this.reqsTotal === 0) {
                 this.setTimeout(this.startTimer, () => this.start(), this.latencyThreshold);
             }
@@ -49,7 +49,7 @@
             this.setProgress(this.reqsCompleted / this.reqsTotal);
         }
 
-        public afterSend(): void {
+        public endLoading(): void {
             this.reqsCompleted++;
             if (this.reqsCompleted >= this.reqsTotal) {
                 this.complete();
