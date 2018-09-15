@@ -8,21 +8,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Toolbelt.Blazor.LoadingBar.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.5.1" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Toolbelt.Blazor.LoadingBar\Toolbelt.Blazor.LoadingBar.csproj" />
     <ProjectReference Include="..\SampleSite.Shared\SampleSite.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="wwwroot\Toolbelt.Blazor.LoadingBar.ts" />
   </ItemGroup>
 
 </Project>

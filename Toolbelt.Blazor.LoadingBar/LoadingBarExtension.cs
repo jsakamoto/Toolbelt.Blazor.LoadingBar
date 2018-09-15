@@ -15,6 +15,8 @@ namespace Toolbelt.Blazor
 
             app.UseHttpClientInterceptor();
 
+            JSRuntime.Current.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.constructDOM()");
+
             var interceptor = app.Services.GetService<HttpClientInterceptor>();
             interceptor.BeforeSend += Interceptor_BeforeSend;
             interceptor.AfterSend += Interceptor_AfterSend;

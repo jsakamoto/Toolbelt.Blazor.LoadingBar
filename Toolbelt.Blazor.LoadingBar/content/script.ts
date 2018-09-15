@@ -8,9 +8,9 @@
 
         private loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
 
-        private loadingBarContainer: HTMLElement;
+        private loadingBarContainer: HTMLElement | null = null;
 
-        private loadingBar: HTMLElement;
+        private loadingBar: HTMLElement | null = null;
 
         private startSize: number = 0.02;
 
@@ -31,13 +31,14 @@
         private completeTimer: TimerHandle = { handle: null };
 
         constructor() {
-            document.addEventListener('readystatechange', () => {
-                if (document.readyState === 'interactive') {
-                    document.body.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
-                    this.loadingBarContainer = document.getElementById('loading-bar');
-                    this.loadingBar = this.loadingBarContainer.getElementsByClassName('bar')[0] as HTMLElement;
-                }
-            });
+        }
+
+        public constructDOM(): void {
+            document.body.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
+            this.loadingBarContainer = document.getElementById('loading-bar');
+            if (this.loadingBarContainer != null) {
+                this.loadingBar = this.loadingBarContainer.getElementsByClassName('bar')[0] as HTMLElement;
+            }
         }
 
         public beforeSend(): void {
@@ -64,7 +65,7 @@
             this.started = true;
 
             // visible loading bar UI.
-            this.loadingBar.classList.add('in-progress');
+            if (this.loadingBar != null) this.loadingBar.classList.add('in-progress');
 
             this.setProgress(this.startSize, { enableTransition: false });
         }
@@ -78,7 +79,7 @@
 
             // Attempt to aggregate any start/complete calls within 500ms:
             this.setTimeout(this.completeTimer, () => {
-                this.loadingBar.classList.remove('in-progress');
+                if (this.loadingBar != null) this.loadingBar.classList.remove('in-progress');
                 this.progress = 0;
                 this.started = false;
             }, 500);
@@ -88,9 +89,14 @@
             if (!this.started) return;
 
             this.progress = progress;
-            if (option.enableTransition) this.loadingBar.classList.remove('no-trans');
-            else this.loadingBar.classList.add('no-trans');
-            this.loadingBar.style.width = (progress * 100) + '%';
+
+            if (this.loadingBar != null) {
+                if (option.enableTransition)
+                    this.loadingBar.classList.remove('no-trans');
+                else
+                    this.loadingBar.classList.add('no-trans');
+                this.loadingBar.style.width = (progress * 100) + '%';
+            }
 
             this.setTimeout(this.incrementTimer, () => this.incrementProgress(), 250);
         }
