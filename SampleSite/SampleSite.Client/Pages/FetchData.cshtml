@@ -1,8 +1,5 @@
-﻿@using SampleSite.Shared
-@page "/fetchdata"
-@implements IDisposable
+﻿@page "/fetchdata"
 @inject HttpClient Http
-@inject HttpClientInterceptor Interceptor
 
 <h1>Weather forecast</h1>
 
@@ -37,29 +34,18 @@ else
     </table>
 }
 
+    <p style="margin-top:6em;">
+        <button class="btn btn-primary" onclick="@Start">START</button>
+    </p>
+
 @functions {
     WeatherForecast[] forecasts;
 
     protected override async Task OnInitAsync()
     {
-        this.Interceptor.BeforeSend += OnBeforeSend;
-        this.Interceptor.AfterSend += OnAfterSend;
+    }
+
+    async Task Start() {
         forecasts = await Http.GetJsonAsync<WeatherForecast[]>("api/SampleData/WeatherForecasts");
-    }
-
-    private void OnBeforeSend(object sender, EventArgs args)
-    {
-        Console.WriteLine("OnBeforeSend");
-    }
-
-    private void OnAfterSend(object sender, EventArgs args)
-    {
-        Console.WriteLine("OnAfterSend");
-    }
-
-    public void Dispose()
-    {
-        this.Interceptor.BeforeSend -= OnBeforeSend;
-        this.Interceptor.AfterSend -= OnAfterSend;
     }
 }

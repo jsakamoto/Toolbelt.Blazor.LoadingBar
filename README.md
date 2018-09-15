@@ -4,6 +4,8 @@
 
 This is a class library that inserts loading bar UI automatically into a client side Blazor application.
 
+![movie.1](.assets/movie-001.gif)
+
 This is a porting from [**angular-loading-bar**](https://github.com/chieffancypants/angular-loading-bar) (except spinner UI).
 
 ## How to install and use?
