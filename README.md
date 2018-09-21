@@ -13,16 +13,20 @@ This is a porting from [**angular-loading-bar**](https://github.com/chieffancypa
 **Step.1** Install the library via NuGet package, like this.
 
 ```shell
-> dotnet install Toolbelt.Blazor.LoadingBar
+> dotnet add package Toolbelt.Blazor.LoadingBar
 ```
 
 **Step.2** Register "LoadingBar" service into the DI container, at `ConfigureService` method in the `Startup` class of your Blazor application.
 
 ```csharp
-public void ConfigureServices(IServiceCollection services)
+using Toolbelt.Blazor.Extensions.DependencyInjection; // <- Add this, and...
+...
+public class Startup
 {
-  services.AddLoadingBar(); // <- Add this line.
-  ...
+  public void ConfigureServices(IServiceCollection services)
+  {
+    services.AddLoadingBar(); // <- Add this line.
+    ...
 ```
 
 **Step.3** Install "LoadingBar" service to loading bar UI works well, at `Configure` method in the `Startup` class of your Blazor application.

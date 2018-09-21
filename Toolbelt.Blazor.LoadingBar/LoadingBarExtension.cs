@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Toolbelt.Blazor
+namespace Toolbelt.Blazor.Extensions.DependencyInjection
 {
     /// <summary>
     /// Extension methods for adding and using LoadingBar.
