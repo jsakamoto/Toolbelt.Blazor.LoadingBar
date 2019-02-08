@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SampleSite.Shared;
 
-namespace SampleSite.Server
+namespace SampleSite.Server.Controllers
 {
     [Route("api/[controller]")]
     public class SampleDataController : Controller

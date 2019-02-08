@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Microsoft.AspNetCore.Blazor.Builder;
+using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Toolbelt.Blazor.Extensions.DependencyInjection
@@ -29,7 +29,7 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         ///  Installs a LoadingBar service to the runtime hosting environment.
         /// </summary>
         /// <param name="app">The Microsoft.AspNetCore.Blazor.Builder.IBlazorApplicationBuilder.</param>
-        public static IBlazorApplicationBuilder UseLoadingBar(this IBlazorApplicationBuilder app)
+        public static IComponentsApplicationBuilder UseLoadingBar(this IComponentsApplicationBuilder app)
         {
             if (Installed) return app;
 

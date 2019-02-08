@@ -1,4 +1,5 @@
 ﻿@page "/fetchdata"
+@using SampleSite.Shared
 @inject HttpClient Http
 
 <h1>Weather forecast</h1>
@@ -34,18 +35,11 @@ else
     </table>
 }
 
-    <p style="margin-top:6em;">
-        <button class="btn btn-primary" onclick="@Start">START</button>
-    </p>
-
 @functions {
     WeatherForecast[] forecasts;
 
-    protected override void OnInit()
+    protected override async Task OnInitAsync()
     {
-    }
-
-    async Task Start() {
         forecasts = await Http.GetJsonAsync<WeatherForecast[]>("api/SampleData/WeatherForecasts");
     }
 }
