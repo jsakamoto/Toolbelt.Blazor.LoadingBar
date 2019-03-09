@@ -1,5 +1,7 @@
+using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace SampleSite.Server
@@ -11,7 +13,11 @@ namespace SampleSite.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddNewtonsoftJson();
-            services.AddResponseCompression();
+            services.AddResponseCompression(opts =>
+            {
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                    new[] { "application/octet-stream" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -22,6 +28,7 @@ namespace SampleSite.Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBlazorDebugging();
             }
 
             app.UseMvc(routes =>
@@ -30,7 +37,6 @@ namespace SampleSite.Server
             });
 
             app.UseBlazor<Client.Startup>();
-            app.UseBlazorDebugging();
         }
     }
 }

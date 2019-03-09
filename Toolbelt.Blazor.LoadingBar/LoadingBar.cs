@@ -10,12 +10,15 @@ namespace Toolbelt.Blazor
     {
         private readonly HttpClientInterceptor Interceptor;
 
+        private readonly IJSRuntime JSRuntime;
+
         /// <summary>
         /// Initialize LoadingBar service instance.
         /// </summary>
-        public LoadingBar(HttpClientInterceptor interceptor)
+        public LoadingBar(HttpClientInterceptor interceptor, IJSRuntime jSRuntime)
         {
             this.Interceptor = interceptor;
+            this.JSRuntime = jSRuntime;
             interceptor.BeforeSend += Interceptor_BeforeSend;
             interceptor.AfterSend += Interceptor_AfterSend;
         }
@@ -26,7 +29,7 @@ namespace Toolbelt.Blazor
 
         internal void ConstructDOM()
         {
-            JSRuntime.Current.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.constructDOM()");
+            JSRuntime?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.constructDOM()");
         }
 
         /// <summary>
@@ -34,7 +37,7 @@ namespace Toolbelt.Blazor
         /// </summary>
         public void BeginLoading()
         {
-            JSRuntime.Current?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.beginLoading()");
+            JSRuntime?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.beginLoading()");
         }
 
         /// <summary>
@@ -42,7 +45,7 @@ namespace Toolbelt.Blazor
         /// </summary>
         public void EndLoading()
         {
-            JSRuntime.Current?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.endLoading()");
+            JSRuntime?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.endLoading()");
         }
 
         /// <summary>
