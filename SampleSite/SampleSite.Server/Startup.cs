@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace SampleSite.Server
 {
@@ -21,7 +22,7 @@ namespace SampleSite.Server
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseResponseCompression();
 
@@ -31,9 +32,11 @@ namespace SampleSite.Server
                 app.UseBlazorDebugging();
             }
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(name: "default", template: "{controller}/{action}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
 
             app.UseBlazor<Client.Startup>();
