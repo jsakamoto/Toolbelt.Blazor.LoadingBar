@@ -3,10 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <IsPackable>true</IsPackable>
-    <RestoreAdditionalProjectSources>
-      https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
-      https://dotnet.myget.org/F/blazor-dev/api/v3/index.json;
-    </RestoreAdditionalProjectSources>
     <LangVersion>7.3</LangVersion>
     <RazorLangVersion>3.0</RazorLangVersion>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
@@ -22,7 +18,9 @@
     <PackageProjectUrl>https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/</PackageProjectUrl>
     <Description>Insert loading bar UI automatically into a client side Blazor application.</Description>
     <PackageTags>blazor,loading,loadingbar,loading-bar</PackageTags>
-    <PackageReleaseNotes>v.5.0.0
+    <PackageReleaseNotes>v.6.0.0
+- BREAKING CHANGE: Support Blazor v.3.0.0 Preview 6 (not compatible with v.3.0.0 Preview 5 or before.)
+v.5.0.0
 - BREAKING CHANGE: Support Blazor v.3.0.0 Preview 4 (not compatible with v.0.9.0 or before.)
 v.4.0.0
 - BREAKING CHANGE: Support Blazor v.0.9.0 (not compatible with v.0.8.0 or before.)
@@ -59,8 +57,8 @@ v.1.0.0
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview4-19216-03" />
-    <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="4.0.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview6.19307.2" />
+    <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,7 +91,7 @@ v.1.0.0
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
-    <Version>5.0.0.0</Version>
+    <Version>6.0.0</Version>
     <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
