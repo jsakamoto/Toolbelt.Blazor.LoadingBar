@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28809.33
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSite.Shared", "SampleSite\SampleSite.Shared\SampleSite.Shared.csproj", "{FA12FE9C-4C26-460D-8BE6-9E0D9036E4D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSite.Shared", "SampleSite\Shared\SampleSite.Shared.csproj", "{FA12FE9C-4C26-460D-8BE6-9E0D9036E4D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSite.Client", "SampleSite\SampleSite.Client\SampleSite.Client.csproj", "{24204D2E-6DC6-4657-895B-508E28FCD9B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSite.Client", "SampleSite\Client\SampleSite.Client.csproj", "{24204D2E-6DC6-4657-895B-508E28FCD9B6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSite.Server", "SampleSite\SampleSite.Server\SampleSite.Server.csproj", "{14833C09-3F4A-40B9-A45A-BE16CBF1DD33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleSite.Server", "SampleSite\Server\SampleSite.Server.csproj", "{14833C09-3F4A-40B9-A45A-BE16CBF1DD33}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "README", "README", "{5F3379A2-DCF0-4809-8DA9-3AE46B7722CD}"
 	ProjectSection(SolutionItems) = preProject
