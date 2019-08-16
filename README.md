@@ -1,12 +1,16 @@
-# Blazor (client-side) LoadingBar [![NuGet Package](https://img.shields.io/nuget/v/Toolbelt.Blazor.LoadingBar.svg)](https://www.nuget.org/packages/Toolbelt.Blazor.LoadingBar/)
+# Blazor WebAssembly (client-side) LoadingBar [![NuGet Package](https://img.shields.io/nuget/v/Toolbelt.Blazor.LoadingBar.svg)](https://www.nuget.org/packages/Toolbelt.Blazor.LoadingBar/)
 
 ## Summary
 
-This is a class library that inserts loading bar UI automatically into a client side Blazor application.
+This is a class library that inserts loading bar UI automatically into a client side Blazor WebAssembly application.
 
 ![movie.1](https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/blob/master/.assets/movie-001.gif?raw=true)
 
 This is a porting from [**angular-loading-bar**](https://github.com/chieffancypants/angular-loading-bar) (except spinner UI).
+
+## Supported Blazor versions
+
+"Blazor WebAssembly App (client-side) LoadingBar" ver.6.x supports Blazor WebAssembly App versions **from ver.3.0.0-prevew 6 to preview 8.**
 
 ## How to install and use?
 
