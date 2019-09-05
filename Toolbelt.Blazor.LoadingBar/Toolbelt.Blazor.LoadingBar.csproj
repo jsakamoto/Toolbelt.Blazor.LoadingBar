@@ -18,7 +18,9 @@
     <PackageProjectUrl>https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/</PackageProjectUrl>
     <Description>Insert loading bar UI automatically into a client side Blazor application.</Description>
     <PackageTags>blazor,loading,loadingbar,loading-bar</PackageTags>
-    <PackageReleaseNotes>v.6.0.0
+    <PackageReleaseNotes>v.7.0.0
+- BREAKING CHANGE: Support Blazor v.3.0.0 Preview 9 (not compatible with v.3.0.0 Preview 8 or before.)
+v.6.0.0
 - BREAKING CHANGE: Support Blazor v.3.0.0 Preview 6 (not compatible with v.3.0.0 Preview 5 or before.)
 v.5.0.0
 - BREAKING CHANGE: Support Blazor v.3.0.0 Preview 4 (not compatible with v.0.9.0 or before.)
@@ -31,7 +33,8 @@ v.2.1.0
 v.2.0.0
 - BREAKING CHANGE: Fix namespace of LoadingBarExtension class.
 v.1.0.0
-- 1st release.</PackageReleaseNotes>
+- 1st release.
+</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -57,7 +60,7 @@ v.1.0.0
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview6.19307.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview9.19424.4" />
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="5.0.0" />
   </ItemGroup>
 
@@ -91,7 +94,7 @@ v.1.0.0
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
-    <Version>6.0.0</Version>
+    <Version>7.0.0</Version>
     <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
   </PropertyGroup>
 
