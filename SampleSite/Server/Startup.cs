@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Serialization;
 using System.Linq;
 
 namespace SampleSite.Server
@@ -14,7 +13,7 @@ namespace SampleSite.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().AddNewtonsoftJson();
+            services.AddMvc();
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
@@ -33,6 +32,7 @@ namespace SampleSite.Server
                 app.UseBlazorDebugging();
             }
 
+            app.UseStaticFiles();
             app.UseClientSideBlazorFiles<Client.Startup>();
 
             app.UseRouting();

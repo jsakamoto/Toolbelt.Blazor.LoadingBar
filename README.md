@@ -10,7 +10,7 @@ This is a porting from [**angular-loading-bar**](https://github.com/chieffancypa
 
 ## Supported Blazor versions
 
-"Blazor WebAssembly App (client-side) LoadingBar" ver.7.x supports Blazor WebAssembly App version **3.0.0-prevew 9.**
+"Blazor WebAssembly App (client-side) LoadingBar" ver.7.x supports Blazor WebAssembly App version from **3.0 Prevew 9** to **3.1 Preview 2.**
 
 ## How to install and use?
 
