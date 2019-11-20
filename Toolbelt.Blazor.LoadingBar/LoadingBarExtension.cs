@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Components.Builder;
+﻿using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Toolbelt.Blazor.Extensions.DependencyInjection
 {
@@ -16,11 +16,7 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         public static void AddLoadingBar(this IServiceCollection services)
         {
             services.AddHttpClientInterceptor();
-
-            if (services.FirstOrDefault(d => d.ServiceType == typeof(LoadingBar)) == null)
-            {
-                services.AddSingleton<LoadingBar>();
-            }
+            services.TryAddSingleton<LoadingBar>();
         }
 
         private static bool Installed;
@@ -32,8 +28,6 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         public static IComponentsApplicationBuilder UseLoadingBar(this IComponentsApplicationBuilder app)
         {
             if (Installed) return app;
-
-            app.UseHttpClientInterceptor();
 
             var loadinBar = app.Services.GetService<LoadingBar>();
             loadinBar.ConstructDOM();

@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using SampleSite.Shared;
 
 namespace SampleSite.Server.Controllers
 {
-    [Route("api/[controller]")]
-    public class SampleDataController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class WeatherForecastController : ControllerBase
     {
-        private static string[] Summaries = new[]
+        private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]")]
-        public async Task<IEnumerable<WeatherForecast>> WeatherForecasts()
+        private readonly ILogger<WeatherForecastController> logger;
+
+        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        {
+            this.logger = logger;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
             await Task.Delay(3000);
 
@@ -26,7 +35,8 @@ namespace SampleSite.Server.Controllers
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
                 Summary = Summaries[rng.Next(Summaries.Length)]
-            });
+            })
+            .ToArray();
         }
     }
 }
