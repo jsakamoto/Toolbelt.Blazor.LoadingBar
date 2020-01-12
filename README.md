@@ -46,6 +46,28 @@ That's all.
 
 After doing those 3 step, you can see a loading bar effect on your Blazor application UI, during HttpClient request going on.
 
+### Configuration
+
+The calling of `services.AddLoadingBar()` and ` app.UseLoadingBar()` injects the references of JavaScript file (.js) and style sheet file (.css) - which are bundled with this package - into your page automatically.
+
+If you don't want this behavior, you can disable these automatic injections, please call `services.AddLoadingBar()` with configuration action like this:
+
+```csharp
+services.AddLoadingBar(options =>
+{
+  // If you don't want automatic injection of js file, add bellow;
+  options.DisableClientScriptAutoInjection = true;
+
+  // If you don't want automatic injection of css file, add bellow;
+  options.DisableStyleSheetAutoInjection = true;
+});
+```
+
+You can inject those helper files manually. The URLs are bellow:
+
+- **.js file** - _content/Toolbelt.Blazor.LoadingBar/script.min.js
+- **.css file** - _content/Toolbelt.Blazor.LoadingBar/style.min.css
+
 ## Credits
 
 Credit goes to [chieffancypants](https://github.com/chieffancypants) for his great works [**angular-loading-bar**](https://github.com/chieffancypants/angular-loading-bar).
