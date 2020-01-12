@@ -16,7 +16,7 @@
 
         private started: boolean = false;
 
-        private progress: number;
+        private progress: number = 0;
 
         private latencyThreshold: number = 100;
 

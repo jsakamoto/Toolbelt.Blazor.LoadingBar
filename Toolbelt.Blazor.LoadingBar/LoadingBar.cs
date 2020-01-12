@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.JSInterop;
 
 namespace Toolbelt.Blazor
@@ -8,9 +9,13 @@ namespace Toolbelt.Blazor
     /// </summary>
     public class LoadingBar : IDisposable
     {
+        internal readonly LoadingBarOptions Options = new LoadingBarOptions();
+
         private readonly HttpClientInterceptor Interceptor;
 
         private readonly IJSRuntime JSRuntime;
+
+        private Task LastTask;
 
         /// <summary>
         /// Initialize LoadingBar service instance.
@@ -29,7 +34,25 @@ namespace Toolbelt.Blazor
 
         internal void ConstructDOM()
         {
-            JSRuntime?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.constructDOM()");
+            if (this.JSRuntime == null) return;
+            this.LastTask = this.ConstructDOMAsync();
+        }
+
+        private async Task ConstructDOMAsync()
+        {
+            if (!Options.DisableStyleSheetAutoInjection)
+            {
+                const string cssPath = "_content/Toolbelt.Blazor.LoadingBar/style.min.css";
+                await this.JSRuntime.InvokeVoidAsync("eval", "((d,s)=>(h=>h.querySelector(`link[href=\"${s}\"]`)?0:(e=>(e.href=s,e.rel='stylesheet',h.insertAdjacentElement('afterBegin',e)))(d.createElement('link')))(d.head))(document,'" + cssPath + "')");
+            }
+
+            if (!Options.DisableClientScriptAutoInjection)
+            {
+                const string scriptPath = "_content/Toolbelt.Blazor.LoadingBar/script.min.js";
+                await this.JSRuntime.InvokeVoidAsync("eval", "new Promise(r=>((d,t,s)=>(h=>h.querySelector(t+`[src=\"${s}\"]`)?r():(e=>(e.src=s,e.onload=r,h.appendChild(e)))(d.createElement(t)))(d.head))(document,'script','" + scriptPath + "'))");
+            }
+
+            await JSRuntime.InvokeVoidAsync("eval", "Toolbelt.Blazor.loadingBar.constructDOM()");
         }
 
         /// <summary>
@@ -37,7 +60,7 @@ namespace Toolbelt.Blazor
         /// </summary>
         public void BeginLoading()
         {
-            JSRuntime?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.beginLoading()");
+            this.InvokeJS("beginLoading");
         }
 
         /// <summary>
@@ -45,7 +68,14 @@ namespace Toolbelt.Blazor
         /// </summary>
         public void EndLoading()
         {
-            JSRuntime?.InvokeAsync<object>("eval", "Toolbelt.Blazor.loadingBar.endLoading()");
+            this.InvokeJS("endLoading");
+        }
+
+        private void InvokeJS(string methodName)
+        {
+            if (this.JSRuntime == null) return;
+            var task = this.LastTask ?? Task.CompletedTask;
+            this.LastTask = task.ContinueWith(_ => JSRuntime.InvokeVoidAsync("eval", "Toolbelt.Blazor.loadingBar." + methodName + "()"));
         }
 
         /// <summary>

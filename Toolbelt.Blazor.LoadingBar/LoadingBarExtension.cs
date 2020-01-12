@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Components.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.JSInterop;
 
 namespace Toolbelt.Blazor.Extensions.DependencyInjection
 {
@@ -15,8 +17,25 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the service to.</param>
         public static void AddLoadingBar(this IServiceCollection services)
         {
+            services.AddLoadingBar(configure: null);
+        }
+
+        /// <summary>
+        ///  Adds a LoadingBar service to the specified Microsoft.Extensions.DependencyInjection.IServiceCollection.
+        /// </summary>
+        /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the service to.</param>
+        public static void AddLoadingBar(this IServiceCollection services, Action<LoadingBarOptions> configure)
+        {
             services.AddHttpClientInterceptor();
-            services.TryAddSingleton<LoadingBar>();
+            services.TryAddSingleton(sp =>
+            {
+                var loadingBar = new LoadingBar(
+                    sp.GetService<HttpClientInterceptor>(),
+                    sp.GetService<IJSRuntime>());
+                configure?.Invoke(loadingBar.Options);
+                return loadingBar;
+            });
+
         }
 
         private static bool Installed;

@@ -1,3 +1,4 @@
+"use strict";
 var Toolbelt;
 (function (Toolbelt) {
     var Blazor;
@@ -9,6 +10,7 @@ var Toolbelt;
                 this.loadingBar = null;
                 this.startSize = 0.02;
                 this.started = false;
+                this.progress = 0;
                 this.latencyThreshold = 100;
                 this.reqsTotal = 0;
                 this.reqsCompleted = 0;
@@ -120,4 +122,3 @@ var Toolbelt;
         Blazor.loadingBar = new LoadingBarClass();
     })(Blazor = Toolbelt.Blazor || (Toolbelt.Blazor = {}));
 })(Toolbelt || (Toolbelt = {}));
-//# sourceMappingURL=script.js.map
