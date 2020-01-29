@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.AspNetCore.Components.Builder;
+using Microsoft.AspNetCore.Blazor.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.JSInterop;
@@ -43,16 +43,16 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         /// <summary>
         ///  Installs a LoadingBar service to the runtime hosting environment.
         /// </summary>
-        /// <param name="app">The Microsoft.AspNetCore.Blazor.Builder.IBlazorApplicationBuilder.</param>
-        public static IComponentsApplicationBuilder UseLoadingBar(this IComponentsApplicationBuilder app)
+        /// <param name="host">The Microsoft.AspNetCore.Blazor.Hosting.WebAssemblyHost.</param>
+        public static WebAssemblyHost UseLoadingBar(this WebAssemblyHost host)
         {
-            if (Installed) return app;
+            if (Installed) return host;
 
-            var loadinBar = app.Services.GetService<LoadingBar>();
+            var loadinBar = host.Services.GetService<LoadingBar>();
             loadinBar.ConstructDOM();
 
             Installed = true;
-            return app;
+            return host;
         }
     }
 }

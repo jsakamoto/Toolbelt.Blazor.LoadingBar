@@ -10,7 +10,7 @@ This is a porting from [**angular-loading-bar**](https://github.com/chieffancypa
 
 ## Supported Blazor versions
 
-"Blazor WebAssembly App (client-side) LoadingBar" ver.9.x supports Blazor WebAssembly App version **3.1 Prevew 4**.
+"Blazor WebAssembly App (client-side) LoadingBar" ver.10.x supports Blazor WebAssembly App version **3.2 Prevew 1**.
 
 ## How to install and use?
 
@@ -20,26 +20,24 @@ This is a porting from [**angular-loading-bar**](https://github.com/chieffancypa
 > dotnet add package Toolbelt.Blazor.LoadingBar
 ```
 
-**Step.2** Register "LoadingBar" service into the DI container, at `ConfigureService` method in the `Startup` class of your Blazor application.
+**Step.2** Register "LoadingBar" service into the DI container, and declare contruct loading bar UI, at `Main()` method in the `Program` class of your Blazor application.
 
 ```csharp
-using Toolbelt.Blazor.Extensions.DependencyInjection; // <- Add this, and...
+using Toolbelt.Blazor.Extensions.DependencyInjection; // <- Open namespace, and...
 ...
-public class Startup
+public class Program
 {
-  public void ConfigureServices(IServiceCollection services)
+  public static async Task Main(string[] args)
   {
-    services.AddLoadingBar(); // <- Add this line.
+    var builder = WebAssemblyHostBuilder.CreateDefault(args);
+    builder.RootComponents.Add<App>("app");
+    builder.Services.AddLoadingBar(); // <-- register the service, and...
+
+    await builder
+        .Build()
+        .UseLoadingBar() // <!-- declare construct loading bar UI.
+        .RunAsync();
     ...
-```
-
-**Step.3** Install "LoadingBar" service to loading bar UI works well, at `Configure` method in the `Startup` class of your Blazor application.
-
-```csharp
-public void Configure(IComponentsApplicationBuilder app)
-{
-  app.UseLoadingBar(); // <- Add this line.
-  ...
 ```
 
 That's all.
@@ -48,12 +46,12 @@ After doing those 3 step, you can see a loading bar effect on your Blazor applic
 
 ### Configuration
 
-The calling of `services.AddLoadingBar()` and ` app.UseLoadingBar()` injects the references of JavaScript file (.js) and style sheet file (.css) - which are bundled with this package - into your page automatically.
+The calling of `AddLoadingBar()` and `UseLoadingBar()` injects the references of JavaScript file (.js) and style sheet file (.css) - which are bundled with this package - into your page automatically.
 
-If you don't want this behavior, you can disable these automatic injections, please call `services.AddLoadingBar()` with configuration action like this:
+If you don't want this behavior, you can disable these automatic injections, please call `AddLoadingBar()` with configuration action like this:
 
 ```csharp
-services.AddLoadingBar(options =>
+builder.Services.AddLoadingBar(options =>
 {
   // If you don't want automatic injection of js file, add bellow;
   options.DisableClientScriptAutoInjection = true;
@@ -76,6 +74,7 @@ This library includes many codes, style sheet definition, and algorithms derived
 
 ## Relese Note
 
+- **v.10.0.0** - BREAKING CHANGE: Support Blazor v.3.2.0 Preview 1 (not compatible with v.3.1.0 Preview 4 or before.)
 - **v.9.0.0** - BREAKING CHANGE: Support Blazor v.3.1.0 Preview 4 (not compatible with v.3.1.0 Preview 3 or before.)
 - **v.8.0.0** - BREAKING CHANGE: Support Blazor v.3.1.0 Preview 3 (not compatible with v.3.1.0 Preview 2 or before.)
 - **v.7.0.0** - BREAKING CHANGE: Support Blazor v.3.0.0 Preview 9 (not compatible with v.3.0.0 Preview 8 or before.)
