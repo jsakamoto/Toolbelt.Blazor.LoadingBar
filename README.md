@@ -53,15 +53,15 @@ If you don't want this behavior, you can disable these automatic injections, ple
 ```csharp
 builder.Services.AddLoadingBar(options =>
 {
-  // If you don't want automatic injection of js file, add bellow;
+  // If you don't want automatic injection of js file, add below;
   options.DisableClientScriptAutoInjection = true;
 
-  // If you don't want automatic injection of css file, add bellow;
+  // If you don't want automatic injection of css file, add bllow;
   options.DisableStyleSheetAutoInjection = true;
 });
 ```
 
-You can inject those helper files manually. The URLs are bellow:
+You can inject those helper files manually. The URLs are below:
 
 - **.js file** - _content/Toolbelt.Blazor.LoadingBar/script.min.js
 - **.css file** - _content/Toolbelt.Blazor.LoadingBar/style.min.css
