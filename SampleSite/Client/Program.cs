@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Blazor.Hosting;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Toolbelt.Blazor.Extensions.DependencyInjection;
 
 namespace SampleSite.Client
@@ -11,6 +12,7 @@ namespace SampleSite.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
             builder.Services.AddLoadingBar();
+            builder.Services.AddBaseAddressHttpClient();
 
             await builder
                 .Build()
