@@ -10,7 +10,7 @@ This is a porting from [**angular-loading-bar**](https://github.com/chieffancypa
 
 ## Supported Blazor versions
 
-"Blazor WebAssembly App (client-side) LoadingBar" ver.11.x supports Blazor WebAssembly App version **3.2 Prevew 2**.
+"Blazor WebAssembly App (client-side) LoadingBar" ver.11.x supports Blazor WebAssembly App version **3.2 Preview 2**.
 
 ## How to install and use?
 
@@ -20,7 +20,7 @@ This is a porting from [**angular-loading-bar**](https://github.com/chieffancypa
 > dotnet add package Toolbelt.Blazor.LoadingBar
 ```
 
-**Step.2** Register "LoadingBar" service into the DI container, and declare contruct loading bar UI, at `Main()` method in the `Program` class of your Blazor application.
+**Step.2** Register "LoadingBar" service into the DI container, and declare construct loading bar UI, at `Main()` method in the `Program` class of your Blazor application.
 
 ```csharp
 using Toolbelt.Blazor.Extensions.DependencyInjection; // <- Open namespace, and...
@@ -54,15 +54,15 @@ If you don't want this behavior, you can disable these automatic injections, ple
 ```csharp
 builder.Services.AddLoadingBar(options =>
 {
-  // If you don't want automatic injection of js file, add bellow;
+  // If you don't want automatic injection of js file, add below;
   options.DisableClientScriptAutoInjection = true;
 
-  // If you don't want automatic injection of css file, add bellow;
+  // If you don't want automatic injection of css file, add bllow;
   options.DisableStyleSheetAutoInjection = true;
 });
 ```
 
-You can inject those helper files manually. The URLs are bellow:
+You can inject those helper files manually. The URLs are below:
 
 - **.js file** - _content/Toolbelt.Blazor.LoadingBar/script.min.js
 - **.css file** - _content/Toolbelt.Blazor.LoadingBar/style.min.css
@@ -73,7 +73,7 @@ Credit goes to [chieffancypants](https://github.com/chieffancypants) for his gre
 
 This library includes many codes, style sheet definition, and algorithms derived from angular-loading-bar.
 
-## Relese Note
+## Release Note
 
 - **v.11.0.0** - BREAKING CHANGE: Support Blazor v.3.2.0 Preview 2 (not compatible with v.3.2.0 Preview 1 or before.)
 - **v.10.0.0** - BREAKING CHANGE: Support Blazor v.3.2.0 Preview 1 (not compatible with v.3.1.0 Preview 4 or before.)
