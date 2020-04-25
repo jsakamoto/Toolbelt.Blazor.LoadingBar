@@ -73,20 +73,9 @@ Credit goes to [chieffancypants](https://github.com/chieffancypants) for his gre
 
 This library includes many codes, style sheet definition, and algorithms derived from angular-loading-bar.
 
-## Release Note
+## Release Notes
 
-- **v.11.0.0** - BREAKING CHANGE: Support Blazor v.3.2.0 Preview 2 (not compatible with v.3.2.0 Preview 1 or before.)
-- **v.10.0.0** - BREAKING CHANGE: Support Blazor v.3.2.0 Preview 1 (not compatible with v.3.1.0 Preview 4 or before.)
-- **v.9.0.0** - BREAKING CHANGE: Support Blazor v.3.1.0 Preview 4 (not compatible with v.3.1.0 Preview 3 or before.)
-- **v.8.0.0** - BREAKING CHANGE: Support Blazor v.3.1.0 Preview 3 (not compatible with v.3.1.0 Preview 2 or before.)
-- **v.7.0.0** - BREAKING CHANGE: Support Blazor v.3.0.0 Preview 9 (not compatible with v.3.0.0 Preview 8 or before.)
-- **v.6.0.0** - BREAKING CHANGE: Support Blazor v.3.0.0 Preview 6 (not compatible with v.3.0.0 Preview 5 or before.)
-- **v.5.0.0** - BREAKING CHANGE: Support Blazor v.3.0.0 Preview 4 (not compatible with v.0.9.0 or before.)
-- **v.4.0.0** - BREAKING CHANGE: Support Blazor v.0.9.0 (not compatible with v.0.8.0 or before.)
-- **v.3.0.0** - BREAKING CHANGE: Support Blazor v.0.8.0 (not compatible with v.0.7.0 or before.)
-- **v.2.1.0** - Support Blazor v.0.6.0 - it was signed strong name.
-- **v.2.0.0** - BREAKING CHANGE: Fix namespace of LoadingBarExtension class.
-- **v.1.0.0** - 1st release.
+Release notes is [here.](https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/blob/master/RELEASE-NOTES.txt)
 
 ## License
 

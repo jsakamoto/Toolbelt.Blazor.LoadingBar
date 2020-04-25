@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "README", "README", "{5F3379A2-DCF0-4809-8DA9-3AE46B7722CD}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		RELEASE-NOTES.txt = RELEASE-NOTES.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Toolbelt.Blazor.LoadingBar", "Toolbelt.Blazor.LoadingBar\Toolbelt.Blazor.LoadingBar.csproj", "{8A6948B0-900F-42DA-9D50-3096BF31B1BF}"

@@ -20,31 +20,8 @@
     <PackageProjectUrl>https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/</PackageProjectUrl>
     <Description>Insert loading bar UI automatically into a client side Blazor application.</Description>
     <PackageTags>blazor,loading,loadingbar,loading-bar</PackageTags>
-    <PackageReleaseNotes>v.11.0.0
-- BREAKING CHANGE: Support Blazor v.3.2.0 Preview 2 (not compatible with v.3.2.0 Preview 1 or before.)
-v.10.0.0
-- BREAKING CHANGE: Support Blazor v.3.2.0 Preview 1 (not compatible with v.3.1.0 Preview 4 or before.)
-v.9.0.0
-- BREAKING CHANGE: Support Blazor v.3.1.0 Preview 4 (not compatible with v.3.1.0 Preview 3 or before.)
-v.8.0.0
-- BREAKING CHANGE: Support Blazor v.3.1.0 Preview 3 (not compatible with v.3.1.0 Preview 2 or before.)
-v.7.0.0
-- BREAKING CHANGE: Support Blazor v.3.0.0 Preview 9 (not compatible with v.3.0.0 Preview 8 or before.)
-v.6.0.0
-- BREAKING CHANGE: Support Blazor v.3.0.0 Preview 6 (not compatible with v.3.0.0 Preview 5 or before.)
-v.5.0.0
-- BREAKING CHANGE: Support Blazor v.3.0.0 Preview 4 (not compatible with v.0.9.0 or before.)
-v.4.0.0
-- BREAKING CHANGE: Support Blazor v.0.9.0 (not compatible with v.0.8.0 or before.)
-v.3.0.0
-- BREAKING CHANGE: Support Blazor v.0.8.0 (not compatible with v.0.7.0 or before.)
-v.2.1.0
-- Support Blazor v.0.6.0 - it was signed strong name.
-v.2.0.0
-- BREAKING CHANGE: Fix namespace of LoadingBarExtension class.
-v.1.0.0
-- 1st release.
-</PackageReleaseNotes>
+    <PackageOutputPath>../_dist</PackageOutputPath>
+    <PackageReleaseNotes>(Please write the package release notes in "../RELEASE-NOTES.txt")</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -64,6 +41,22 @@ v.1.0.0
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="..\.assets\nupkg-icon.png" Visible="false">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <Target Name="BuildPackageReleaseNotes" BeforeTargets="GenerateNuspec">
+    <ReadLinesFromFile File="../RELEASE-NOTES.txt">
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
+
   <PropertyGroup>
     <TypeScriptTarget>ES5</TypeScriptTarget>
     <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
@@ -78,6 +71,7 @@ v.1.0.0
     <TypeScriptSourceMap>True</TypeScriptSourceMap>
     <TypeScriptMapRoot />
     <TypeScriptSourceRoot />
+    <PackageIcon>nupkg-icon.png</PackageIcon>
   </PropertyGroup>
 
 </Project>
