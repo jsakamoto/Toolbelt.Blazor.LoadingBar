@@ -10,7 +10,7 @@ This is a porting from [**angular-loading-bar**](https://github.com/chieffancypa
 
 ## Supported Blazor versions
 
-"Blazor WebAssembly App (client-side) LoadingBar" ver.11.x supports Blazor WebAssembly App version **3.2 Preview 2~4**.
+"Blazor WebAssembly App (client-side) LoadingBar" ver.12.x supports Blazor WebAssembly App version **3.2 Preview 2~5**.
 
 ## How to install and use?
 
@@ -38,6 +38,20 @@ public class Program
         .Build()
         .UseLoadingBar() // <!-- declare construct loading bar UI.
         .RunAsync();
+    ...
+```
+
+**Step.3** Add invoking `EnableIntercept(IServiceProvider)` extension method when registration of `HttpClient` as a transient service to DI container.
+
+```csharp
+public class Program
+{
+  public static async Task Main(string[] args)
+  {
+    ...
+    builder.Services.AddTransient(sp => new HttpClient { 
+      BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) 
+    }.EnableIntercept(sp)); // <- Add this!
     ...
 ```
 

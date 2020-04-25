@@ -1,3 +1,6 @@
+v.12.0.0
+- BREAKING CHANGE: Support Blazor v.3.2.0 Preview 5 style HttpClient DI container registration.
+
 v.11.0.0
 - BREAKING CHANGE: Support Blazor v.3.2.0 Preview 2 (not compatible with v.3.2.0 Preview 1 or before.)
 
