@@ -8,9 +8,11 @@ This is a class library that inserts loading bar UI automatically into a client 
 
 This is a porting from [**angular-loading-bar**](https://github.com/chieffancypants/angular-loading-bar) (except spinner UI).
 
+Any HTTP requests to servers from HttpClient will cause appearing loading bar effect if the request takes over 100 msec.
+
 ## Supported Blazor versions
 
-"Blazor WebAssembly App (client-side) LoadingBar" ver.12.x supports Blazor WebAssembly App version **3.2 Preview 2~5, and Release Candidate 1**.
+"Blazor WebAssembly App (client-side) LoadingBar" ver.12.x supports Blazor WebAssembly App version **3.2 Preview 2~5,  Release Candidates, and 3.2 Final Release!**
 
 ## How to install and use?
 
