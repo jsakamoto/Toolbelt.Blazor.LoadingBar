@@ -24,10 +24,13 @@ namespace SampleSite.Server.Controllers
             this.logger = logger;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<WeatherForecast>> Get()
+        [HttpGet, HttpPost]
+        public async Task<IEnumerable<WeatherForecast>> RespondWeatherForecast([FromQuery] bool wait = true)
         {
-            await Task.Delay(3000);
+            if (wait)
+            {
+                await Task.Delay(3000);
+            }
 
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast

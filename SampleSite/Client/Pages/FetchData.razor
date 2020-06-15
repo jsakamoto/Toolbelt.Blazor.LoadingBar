@@ -5,7 +5,12 @@
 <h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
-
+<p>
+    <button class="btn btn-primary" @onclick="(()=>ReFetchAsync(wait: true))">Re-fetch</button>
+    <button class="btn btn-primary" @onclick="(()=>ReFetchAsync(wait: false))">Re-fetch with No-Wait</button>
+    <button class="btn btn-primary" @onclick="(()=>FetchByHttpPostAsync(wait: true))">Fetch by POST</button>
+    <button class="btn btn-primary" @onclick="(()=>FetchByHttpPostAsync(wait: false))">Fetch by POST with No-Wait</button>
+</p>
 @if (forecasts == null)
 {
     <p><em>Loading...</em></p>
@@ -41,5 +46,18 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+    }
+
+    private async Task ReFetchAsync(bool wait)
+    {
+        forecasts = null;
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>($"WeatherForecast?wait={wait}");
+    }
+
+    private async Task FetchByHttpPostAsync(bool wait)
+    {
+        forecasts = null;
+        var response = await Http.PostAsync($"WeatherForecast?wait={wait}", new StringContent(""));
+        forecasts = await response.EnsureSuccessStatusCode().Content.ReadFromJsonAsync<WeatherForecast[]>();
     }
 }
