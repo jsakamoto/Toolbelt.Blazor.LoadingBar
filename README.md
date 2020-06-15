@@ -10,6 +10,10 @@ This is a porting from [**angular-loading-bar**](https://github.com/chieffancypa
 
 Any HTTP requests to servers from HttpClient will cause appearing loading bar effect if the request takes over 100 msec.
 
+The live demo site is here:
+
+- [https://demo-blazor-loadingbar.azurewebsites.net/fetchdata](https://demo-blazor-loadingbar.azurewebsites.net/fetchdata)
+
 ## Supported Blazor versions
 
 "Blazor WebAssembly App (client-side) LoadingBar" ver.12.x supports Blazor WebAssembly App version **3.2 Preview 2~5,  Release Candidates, and 3.2 Final Release!**
