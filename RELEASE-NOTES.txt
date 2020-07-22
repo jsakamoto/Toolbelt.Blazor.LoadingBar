@@ -1,3 +1,6 @@
+v.12.0.1
+- Fix: it throws an unhandled exception when HttpClient is registered as a scoped service.
+
 v.12.0.0
 - BREAKING CHANGE: Support Blazor v.3.2.0 Preview 5 style HttpClient DI container registration.
 
