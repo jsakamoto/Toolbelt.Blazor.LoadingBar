@@ -16,7 +16,12 @@ The live demo site is here:
 
 ## Supported Blazor versions
 
-"Blazor WebAssembly App (client-side) LoadingBar" ver.12.x supports Blazor WebAssembly App version **3.2 Preview 2~5,  Release Candidates, and 3.2 Final Release!**
+"Blazor WebAssembly App (client-side) LoadingBar" ver.12.x supports Blazor WebAssembly App versions below.
+
+- v.3.2 
+    - including preview 2~5 and release candidates.
+- v.5.0 
+    - including previews and release candidates.
 
 ## How to install and use?
 
