@@ -52,7 +52,7 @@ namespace Toolbelt.Blazor
                 await this.JSRuntime.InvokeVoidAsync("eval", "new Promise(r=>((d,t,s)=>(h=>h.querySelector(t+`[src=\"${s}\"]`)?r():(e=>(e.src=s,e.onload=r,h.appendChild(e)))(d.createElement(t)))(d.head))(document,'script','" + scriptPath + "'))");
             }
 
-            await JSRuntime.InvokeVoidAsync("eval", "Toolbelt.Blazor.loadingBar.constructDOM()");
+            await JSRuntime.InvokeVoidAsync("Toolbelt.Blazor.loadingBar.constructDOM", this.Options.LoadingBarColor);
         }
 
         /// <summary>

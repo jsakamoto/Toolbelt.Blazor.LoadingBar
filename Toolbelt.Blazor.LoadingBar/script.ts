@@ -33,7 +33,8 @@
         constructor() {
         }
 
-        public constructDOM(): void {
+        public constructDOM(barColor: string): void {
+            document.documentElement.style.setProperty('--toolbelt-loadingbar-color', barColor);
             document.body.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
             this.loadingBarContainer = document.getElementById('loading-bar');
             if (this.loadingBarContainer != null) {

@@ -18,7 +18,8 @@ var Toolbelt;
                 this.incrementTimer = { handle: null };
                 this.completeTimer = { handle: null };
             }
-            LoadingBarClass.prototype.constructDOM = function () {
+            LoadingBarClass.prototype.constructDOM = function (barColor) {
+                document.documentElement.style.setProperty('--toolbelt-loadingbar-color', barColor);
                 document.body.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
                 this.loadingBarContainer = document.getElementById('loading-bar');
                 if (this.loadingBarContainer != null) {

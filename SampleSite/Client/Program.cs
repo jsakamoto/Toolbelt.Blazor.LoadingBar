@@ -14,7 +14,10 @@ namespace SampleSite.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
-            builder.Services.AddLoadingBar();
+            builder.Services.AddLoadingBar(options =>
+            {
+                options.LoadingBarColor = "yellow";
+            });
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }.EnableIntercept(sp));
 

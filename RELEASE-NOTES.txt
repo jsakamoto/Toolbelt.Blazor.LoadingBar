@@ -1,3 +1,6 @@
+v.12.1.0
+- Improve: The color of the loading bar can be customizable.
+
 v.12.0.1
 - Fix: it throws an unhandled exception when HttpClient is registered as a scoped service.
 

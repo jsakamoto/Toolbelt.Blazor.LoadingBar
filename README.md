@@ -72,6 +72,30 @@ After doing those 3 step, you can see a loading bar effect on your Blazor applic
 
 ### Configuration
 
+#### Configure the color of the loading bar
+
+If you want to customize the color of the loading bar, please call `AddLoadingBar()` with configuration action like this:
+
+```csharp
+builder.Services.AddLoadingBar(options =>
+{
+  // Specify the color of the loading bar
+  // by CSS color descriptor.
+  options.LoadingBarColor = "yellow";
+});
+```
+
+And also, the color of the loading bar is defined as a [CSS variable](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties), and the variable name is `--toolbelt-loadingbar-color`.
+
+So you can change the color of the loading bar anytime by using JavaScript like this:
+
+```js
+document.documentElement.style.setProperty('--toolbelt-loadingbar-color', '#ff00dc')
+```
+
+
+#### Configure injection of CSS and JavaScript
+
 The calling of `AddLoadingBar()` and `UseLoadingBar()` injects the references of JavaScript file (.js) and style sheet file (.css) - which are bundled with this package - into your page automatically.
 
 If you don't want this behavior, you can disable these automatic injections, please call `AddLoadingBar()` with configuration action like this:
