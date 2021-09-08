@@ -1,5 +1,10 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">SampleSite</a>
+﻿@using System.Runtime.InteropServices
+
+<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">
+        <div class="site-title">SampleSite</div>
+        <div class="framework-description">@RuntimeInformation.FrameworkDescription / @RuntimeInformation.ProcessArchitecture</div>
+    </a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>

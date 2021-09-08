@@ -9,10 +9,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
-    <PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="12.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <!--<PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="12.1.0" />-->
+    <ProjectReference Include="..\..\Toolbelt.Blazor.LoadingBar\Toolbelt.Blazor.LoadingBar.csproj" />
     <ProjectReference Include="..\Shared\SampleSite.Shared.csproj" />
   </ItemGroup>
 

@@ -17,6 +17,8 @@ namespace SampleSite.Client
             builder.Services.AddLoadingBar(options =>
             {
                 options.LoadingBarColor = "yellow";
+                //options.DisableStyleSheetAutoInjection = true;
+                //options.DisableClientScriptAutoInjection = true;
             });
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) }.EnableIntercept(sp));
