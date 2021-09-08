@@ -17,10 +17,21 @@ export var Toolbelt;
                 this.incrementTimer = { handle: null };
                 this.completeTimer = { handle: null };
             }
-            constructDOM(barColor) {
-                document.documentElement.style.setProperty('--toolbelt-loadingbar-color', barColor);
-                document.body.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
-                this.loadingBarContainer = document.getElementById('loading-bar');
+            constructDOM(barColor, cssPath, versionText) {
+                const doc = document;
+                if (cssPath !== '') {
+                    const head = doc.head;
+                    let cssLinkElement = head.querySelector(`link[href^=\"${cssPath}\"]`);
+                    if (cssLinkElement === null) {
+                        cssLinkElement = doc.createElement('link');
+                        cssLinkElement.rel = 'stylesheet';
+                        cssLinkElement.href = cssPath + '?v=' + versionText;
+                        head.insertAdjacentElement('afterbegin', cssLinkElement);
+                    }
+                }
+                doc.documentElement.style.setProperty('--toolbelt-loadingbar-color', barColor);
+                doc.body.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
+                this.loadingBarContainer = doc.getElementById('loading-bar');
                 if (this.loadingBarContainer != null) {
                     this.loadingBar = this.loadingBarContainer.getElementsByClassName('bar')[0];
                 }

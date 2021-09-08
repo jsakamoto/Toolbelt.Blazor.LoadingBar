@@ -45,16 +45,10 @@ namespace Toolbelt.Blazor
 
         private async Task ConstructDOMAsync()
         {
-            if (!this.Options.DisableStyleSheetAutoInjection)
-            {
-                const string cssPath = "_content/Toolbelt.Blazor.LoadingBar/style.min.css";
-                await this.JSRuntime.InvokeVoidAsync("eval", "((d,s)=>(h=>h.querySelector(`link[href=\"${s}\"]`)?0:(e=>(e.href=s,e.rel='stylesheet',h.insertAdjacentElement('afterBegin',e)))(d.createElement('link')))(d.head))(document,'" + cssPath + "')");
-            }
-
+            var version = this.GetVersionText();
 #if ENABLE_JSMODULE
             if (!this.Options.DisableClientScriptAutoInjection)
             {
-                var version = this.GetVersionText();
                 var scriptPath = $"./_content/Toolbelt.Blazor.LoadingBar/script.module.min.js?v={version}";
                 this.JSModule = await this.JSRuntime.InvokeAsync<IJSObjectReference>("import", scriptPath);
                 this.JSInvoker = this.JSModule.InvokeVoidAsync;
@@ -67,14 +61,18 @@ namespace Toolbelt.Blazor
 #else
             if (!this.Options.DisableClientScriptAutoInjection)
             {
-                var version = this.GetVersionText();
-                var scriptPath = $"_content/Toolbelt.Blazor.LoadingBar/script.min.js?v={version}";
-                await this.JSRuntime.InvokeVoidAsync("eval", "new Promise(r=>((d,t,s)=>(h=>h.querySelector(t+`[src^=\"${s}\"]`)?r():(e=>(e.src=s,e.onload=r,h.appendChild(e)))(d.createElement(t)))(d.head))(document,'script','" + scriptPath + "'))");
+                var scriptPath = "_content/Toolbelt.Blazor.LoadingBar/script.min.js";
+                await this.JSRuntime.InvokeVoidAsync("eval", "new Promise(r=>((d,t,s,v)=>(h=>h.querySelector(t+`[src^=\"${s}\"]`)?r():(e=>(e.src=(s+v),e.onload=r,h.appendChild(e)))(d.createElement(t)))(d.head))(document,'script','" + scriptPath + "','?v=" + version + "'))");
             }
             await this.JSRuntime.InvokeVoidAsync("Toolbelt.Blazor.loadingBarReady");
             this.JSInvoker = this.JSRuntime.InvokeVoidAsync;
 #endif
-            await this.JSInvoker("Toolbelt.Blazor.loadingBar.constructDOM", new object[] { this.Options.LoadingBarColor });
+            var cssPath = "_content/Toolbelt.Blazor.LoadingBar/style.min.css";
+            await this.JSInvoker("Toolbelt.Blazor.loadingBar.constructDOM", new object[] { 
+                this.Options.LoadingBarColor,
+                this.Options.DisableStyleSheetAutoInjection ? "" : cssPath,
+                version
+            });
         }
 
         /// <summary>
