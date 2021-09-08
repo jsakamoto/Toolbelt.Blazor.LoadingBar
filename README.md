@@ -4,7 +4,7 @@
 
 This is a class library that inserts loading bar UI automatically into a client side Blazor WebAssembly application.
 
-![movie.1](https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/blob/master/.assets/movie-001.gif?raw=true)
+![movie.1](https://raw.githubusercontent.com/jsakamoto/Toolbelt.Blazor.LoadingBar/master/.assets/movie-001.gif)
 
 This is a porting from [**angular-loading-bar**](https://github.com/chieffancypants/angular-loading-bar) (except spinner UI).
 
@@ -16,7 +16,7 @@ The live demo site is here:
 
 ## Supported Blazor versions
 
-"Blazor WebAssembly App (client-side) LoadingBar" ver.12.x supports Blazor WebAssembly App versions below.
+"Blazor WebAssembly App (client-side) LoadingBar" ver.12.x or later supports Blazor WebAssembly App versions below.
 
 - v.3.2 
     - including preview 2~5 and release candidates.
@@ -34,7 +34,7 @@ The live demo site is here:
 **Step.2** Register "LoadingBar" service into the DI container, and declare construct loading bar UI, at `Main()` method in the `Program` class of your Blazor application.
 
 ```csharp
-using Toolbelt.Blazor.Extensions.DependencyInjection; // <- Open namespace, and...
+using Toolbelt.Blazor.Extensions.DependencyInjection; // 👈 Open namespace, and...
 ...
 public class Program
 {
@@ -42,9 +42,9 @@ public class Program
   {
     var builder = WebAssemblyHostBuilder.CreateDefault(args);
     builder.RootComponents.Add<App>("app");
-    builder.Services.AddLoadingBar(); // <-- register the service, and...
+    builder.Services.AddLoadingBar(); // 👈 register the service, and...
     ...
-    builder.UseLoadingBar() // <!-- declare construct loading bar UI.
+    builder.UseLoadingBar(); // 👈 declare construct loading bar UI.
     ...
     await builder.Build().RunAsync();
     ...
@@ -60,7 +60,7 @@ public class Program
     ...
     builder.Services.AddScoped(sp => new HttpClient { 
       BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) 
-    }.EnableIntercept(sp)); // <- Add this!
+    }.EnableIntercept(sp)); // 👈 Add this!
     ...
 ```
 
