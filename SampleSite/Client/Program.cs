@@ -32,10 +32,8 @@ namespace SampleSite.Client
                 client.EnableIntercept(sp);
             });
 
-            await builder
-                .Build()
-                .UseLoadingBar()
-                .RunAsync();
+            builder.UseLoadingBar();
+            await builder.Build().RunAsync();
         }
     }
 }

@@ -44,11 +44,9 @@ public class Program
     builder.RootComponents.Add<App>("app");
     builder.Services.AddLoadingBar(); // <-- register the service, and...
     ...
-
-    await builder
-        .Build()
-        .UseLoadingBar() // <!-- declare construct loading bar UI.
-        .RunAsync();
+    builder.UseLoadingBar() // <!-- declare construct loading bar UI.
+    ...
+    await builder.Build().RunAsync();
     ...
 ```
 

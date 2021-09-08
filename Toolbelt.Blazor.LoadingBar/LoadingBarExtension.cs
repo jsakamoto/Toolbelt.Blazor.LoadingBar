@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -44,6 +45,8 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         ///  Installs a LoadingBar service to the runtime hosting environment.
         /// </summary>
         /// <param name="host">The Microsoft.AspNetCore.Blazor.Hosting.WebAssemblyHost.</param>
+        [Obsolete("Use \"builder.UserLoadingBar();\" instead.")]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public static WebAssemblyHost UseLoadingBar(this WebAssemblyHost host)
         {
             if (Installed) return host;
@@ -53,6 +56,20 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
 
             Installed = true;
             return host;
+        }
+
+        /// <summary>
+        ///  Installs a LoadingBar service to the runtime hosting environment.
+        /// </summary>
+        /// <param name="hostBuilder">The Microsoft.AspNetCore.Blazor.Hosting.WebAssemblyHostBuilder.</param>
+        public static WebAssemblyHostBuilder UseLoadingBar(this WebAssemblyHostBuilder hostBuilder)
+        {
+            if (!Installed)
+            {
+                hostBuilder.RootComponents.Add<ScriptInjectorComponent>("script[src^='_framework/blazor']");
+            }
+            Installed = true;
+            return hostBuilder;
         }
     }
 }
