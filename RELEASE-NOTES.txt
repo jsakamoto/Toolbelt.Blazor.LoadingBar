@@ -1,3 +1,8 @@
+v.13.0.0
+- Improve: load the helper JavaScript by Blazor JavaScript isolation feature (ES2015 module system) instead of using "eval".
+- Improve: load the style sheet by using the JavaScript helper code instead of using "eval".
+- Improve: The "UseLoadingBar()" extension method can be applied to the HostBuilder directly.
+
 v.12.1.0
 - Improve: The color of the loading bar can be customizable.
 
