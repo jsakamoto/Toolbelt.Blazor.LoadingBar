@@ -17,6 +17,7 @@ namespace SampleSite.Client
             builder.Services.AddLoadingBar(options =>
             {
                 options.LoadingBarColor = "yellow";
+                //options.ContainerSelector = "#custom-loadingbar-container";
                 //options.DisableStyleSheetAutoInjection = true;
                 //options.DisableClientScriptAutoInjection = true;
             });

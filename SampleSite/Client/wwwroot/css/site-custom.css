@@ -5,3 +5,12 @@
 .framework-description {
     font-size: 11px;
 }
+
+#custom-loadingbar-container {
+    position: relative;
+    width: 100%;
+}
+
+    #custom-loadingbar-container .bar {
+        position: absolute;
+    }

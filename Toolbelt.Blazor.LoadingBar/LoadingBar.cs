@@ -71,7 +71,8 @@ namespace Toolbelt.Blazor
             await this.JSInvoker("Toolbelt.Blazor.loadingBar.constructDOM", new object[] { 
                 this.Options.LoadingBarColor,
                 this.Options.DisableStyleSheetAutoInjection ? "" : cssPath,
-                version
+                version,
+                this.Options.ContainerSelector
             });
         }
 
