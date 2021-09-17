@@ -1,3 +1,6 @@
+v.13.1.1
+- Fix: constructing the loading bar DOM elements will fail in some edge cases.
+
 v.13.1.0
 - Improve: Add the option that the selector of the container what the loading bar contents inject into.
 

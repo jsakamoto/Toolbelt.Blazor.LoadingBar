@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="13.1.0-preview.1.0" />
+    <PackageReference Include="Toolbelt.Blazor.LoadingBar" Version="13.1.1" />
     <!--<ProjectReference Include="..\..\Toolbelt.Blazor.LoadingBar\Toolbelt.Blazor.LoadingBar.csproj" />-->
     <ProjectReference Include="..\Shared\SampleSite.Shared.csproj" />
   </ItemGroup>
