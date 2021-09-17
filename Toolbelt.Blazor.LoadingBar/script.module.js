@@ -17,8 +17,9 @@ export var Toolbelt;
                 this.incrementTimer = { handle: null };
                 this.completeTimer = { handle: null };
             }
-            constructDOM(barColor, cssPath, versionText) {
+            constructDOM(barColor, cssPath, versionText, containerSelector) {
                 const doc = document;
+                console.log('containerSelector', containerSelector);
                 if (cssPath !== '') {
                     const head = doc.head;
                     let cssLinkElement = head.querySelector(`link[href^=\"${cssPath}\"]`);
@@ -30,7 +31,10 @@ export var Toolbelt;
                     }
                 }
                 doc.documentElement.style.setProperty('--toolbelt-loadingbar-color', barColor);
-                doc.body.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
+                const container = doc.querySelector(containerSelector || 'body');
+                if (container === null)
+                    throw new Error('The container element could not found by selector "' + containerSelector + '"');
+                container.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
                 this.loadingBarContainer = doc.getElementById('loading-bar');
                 if (this.loadingBarContainer != null) {
                     this.loadingBar = this.loadingBarContainer.getElementsByClassName('bar')[0];

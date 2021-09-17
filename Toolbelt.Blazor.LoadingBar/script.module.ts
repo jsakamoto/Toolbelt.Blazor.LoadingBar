@@ -33,8 +33,9 @@
         constructor() {
         }
 
-        public constructDOM(barColor: string, cssPath: string, versionText: string): void {
+        public constructDOM(barColor: string, cssPath: string, versionText: string, containerSelector: string | null | undefined): void {
             const doc = document;
+            console.log('containerSelector', containerSelector)
 
             if (cssPath !== '') {
                 const head = doc.head;
@@ -48,7 +49,11 @@
             }
 
             doc.documentElement.style.setProperty('--toolbelt-loadingbar-color', barColor);
-            doc.body.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
+
+            const container = doc.querySelector(containerSelector || 'body');
+            if (container === null) throw new Error('The container element could not found by selector "' + containerSelector + '"');
+            container.insertAdjacentHTML('afterbegin', this.loadingBarTemplate);
+
             this.loadingBarContainer = doc.getElementById('loading-bar');
             if (this.loadingBarContainer != null) {
                 this.loadingBar = this.loadingBarContainer.getElementsByClassName('bar')[0] as HTMLElement;

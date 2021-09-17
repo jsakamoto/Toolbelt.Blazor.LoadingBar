@@ -114,6 +114,20 @@ You can inject those helper files manually. The URLs are below:
 - **.js file** - _content/Toolbelt.Blazor.LoadingBar/script.min.js
 - **.css file** - _content/Toolbelt.Blazor.LoadingBar/style.min.css
 
+#### Configure the container element what the loading bar contents inject into
+
+By default, the "Loading bar" injects its DOM contents to the inside of the body element.
+
+If you want to specify the element where the "Loading Bar" 's contents are injected, you can do that by setting a query selector to the `ContainerSelector` option, like this.
+
+```csharp
+builder.Services.AddLoadingBar(options =>
+{
+  options.ContainerSelector = "#selector-of-container";
+});
+```
+
+
 ## Credits
 
 Credit goes to [chieffancypants](https://github.com/chieffancypants) for his great works [**angular-loading-bar**](https://github.com/chieffancypants/angular-loading-bar).

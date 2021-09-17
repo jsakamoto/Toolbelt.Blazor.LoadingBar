@@ -19,5 +19,10 @@
         /// Get or set the color of the loading bar by CSS color descriptor.
         /// </summary>
         public string LoadingBarColor { get; set; } = "#29d";
+
+        /// <summary>
+        /// Get or set the selector of the container what the loading bar contents inject into.
+        /// </summary>
+        public string ContainerSelector { get; set; } = "body";
     }
 }
