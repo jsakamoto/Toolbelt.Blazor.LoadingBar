@@ -66,7 +66,7 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         {
             if (!Installed)
             {
-                hostBuilder.RootComponents.Add<ScriptInjectorComponent>("script[src^='_framework/blazor']");
+                hostBuilder.RootComponents.Add<ScriptInjectorComponent>("script[src]");
             }
             Installed = true;
             return hostBuilder;
