@@ -1,6 +1,9 @@
 ﻿@page "/fetchdata"
 @using SampleSite.Shared
+@using Toolbelt.Blazor
+@implements IDisposable
 @inject SampleSite.Client.Service.WeatherForecastService WeatherForecastService
+@inject HttpClientInterceptor Interceptor
 
 <h1>Weather forecast</h1>
 
@@ -45,6 +48,8 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        Interceptor.BeforeSend += Interceptor_BeforeSend;
+        Interceptor.AfterSend += Interceptor_AfterSend;
         forecasts = await WeatherForecastService.FetchForecastsAsync();
     }
 
@@ -58,5 +63,21 @@ else
     {
         forecasts = null;
         forecasts = await WeatherForecastService.FetchForecastsByPostAsync(wait);
+    }
+
+    void Interceptor_BeforeSend(object sender, HttpClientInterceptorEventArgs e)
+    {
+        Console.WriteLine("Weather forecast - before send HTTP request.");
+    }
+
+    void Interceptor_AfterSend(object sender, HttpClientInterceptorEventArgs e)
+    {
+        Console.WriteLine("Weather forecast - after send HTTP request.");
+    }
+
+    public void Dispose()
+    {
+        Interceptor.BeforeSend -= Interceptor_BeforeSend;
+        Interceptor.AfterSend -= Interceptor_AfterSend;
     }
 }
