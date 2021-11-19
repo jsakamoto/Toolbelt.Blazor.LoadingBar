@@ -1,3 +1,6 @@
+v.13.1.2
+- Fix: The loading bar doesn't appear in some cases.
+
 v.13.1.1
 - Fix: constructing the loading bar DOM elements will fail in some edge cases.
 
