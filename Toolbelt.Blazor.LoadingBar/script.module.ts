@@ -6,7 +6,7 @@
 
     export class LoadingBarClass {
 
-        private loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
+        private loadingBarTemplate = '<div id="loading-bar" style="display:none;"><div class="bar" style="width:0;"><div class="peg"></div></div></div>';
 
         private loadingBarContainer: HTMLElement | null = null;
 
@@ -35,18 +35,21 @@
 
         public constructDOM(barColor: string, cssPath: string, versionText: string, containerSelector: string | null | undefined): void {
             const doc = document;
-            console.log('containerSelector', containerSelector)
 
+            let cssAwaiter: Promise<void> | null = null;
             if (cssPath !== '') {
                 const head = doc.head;
-                let cssLinkElement: HTMLLinkElement|null = head.querySelector(`link[href^=\"${cssPath}\"]`);
+                let cssLinkElement: HTMLLinkElement | null = head.querySelector(`link[href^=\"${cssPath}\"]`);
                 if (cssLinkElement === null) {
                     cssLinkElement = doc.createElement('link');
                     cssLinkElement.rel = 'stylesheet';
                     cssLinkElement.href = cssPath + '?v=' + versionText;
                     head.insertAdjacentElement('afterbegin', cssLinkElement);
+                    const cle = cssLinkElement;
+                    cssAwaiter = new Promise<void>(resolve => cle.onload = () => { resolve(); });
                 }
             }
+            if (cssAwaiter === null) cssAwaiter = new Promise<void>(resolve => resolve());
 
             doc.documentElement.style.setProperty('--toolbelt-loadingbar-color', barColor);
 
@@ -57,6 +60,8 @@
             this.loadingBarContainer = doc.getElementById('loading-bar');
             if (this.loadingBarContainer != null) {
                 this.loadingBar = this.loadingBarContainer.getElementsByClassName('bar')[0] as HTMLElement;
+                const lbc = this.loadingBarContainer;
+                cssAwaiter.then(() => { lbc.style.display = 'block'; });
             }
         }
 

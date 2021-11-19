@@ -66,7 +66,8 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         {
             if (!Installed)
             {
-                hostBuilder.RootComponents.Add<ScriptInjectorComponent>("script[src]");
+                var mapping = new RootComponentMapping(typeof(ScriptInjectorComponent), "script[src]");
+                hostBuilder.RootComponents.Insert(0, mapping);
             }
             Installed = true;
             return hostBuilder;

@@ -4,7 +4,7 @@ export var Toolbelt;
     (function (Blazor) {
         class LoadingBarClass {
             constructor() {
-                this.loadingBarTemplate = '<div id="loading-bar"><div class="bar"><div class="peg"></div></div></div>';
+                this.loadingBarTemplate = '<div id="loading-bar" style="display:none;"><div class="bar" style="width:0;"><div class="peg"></div></div></div>';
                 this.loadingBarContainer = null;
                 this.loadingBar = null;
                 this.startSize = 0.02;
@@ -19,7 +19,7 @@ export var Toolbelt;
             }
             constructDOM(barColor, cssPath, versionText, containerSelector) {
                 const doc = document;
-                console.log('containerSelector', containerSelector);
+                let cssAwaiter = null;
                 if (cssPath !== '') {
                     const head = doc.head;
                     let cssLinkElement = head.querySelector(`link[href^=\"${cssPath}\"]`);
@@ -28,8 +28,12 @@ export var Toolbelt;
                         cssLinkElement.rel = 'stylesheet';
                         cssLinkElement.href = cssPath + '?v=' + versionText;
                         head.insertAdjacentElement('afterbegin', cssLinkElement);
+                        const cle = cssLinkElement;
+                        cssAwaiter = new Promise(resolve => cle.onload = () => { resolve(); });
                     }
                 }
+                if (cssAwaiter === null)
+                    cssAwaiter = new Promise(resolve => resolve());
                 doc.documentElement.style.setProperty('--toolbelt-loadingbar-color', barColor);
                 const container = doc.querySelector(containerSelector || 'body');
                 if (container === null)
@@ -38,6 +42,8 @@ export var Toolbelt;
                 this.loadingBarContainer = doc.getElementById('loading-bar');
                 if (this.loadingBarContainer != null) {
                     this.loadingBar = this.loadingBarContainer.getElementsByClassName('bar')[0];
+                    const lbc = this.loadingBarContainer;
+                    cssAwaiter.then(() => { lbc.style.display = 'block'; });
                 }
             }
             beginLoading() {

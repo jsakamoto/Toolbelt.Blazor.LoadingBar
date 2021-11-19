@@ -50,7 +50,7 @@ else
     {
         Interceptor.BeforeSend += Interceptor_BeforeSend;
         Interceptor.AfterSend += Interceptor_AfterSend;
-        forecasts = await WeatherForecastService.FetchForecastsAsync();
+        forecasts = await WeatherForecastService.FetchForecastsAsync(wait: true);
     }
 
     private async Task ReFetchAsync(bool wait)

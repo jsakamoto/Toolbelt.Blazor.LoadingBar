@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.JSInterop;
@@ -19,6 +20,8 @@ namespace Toolbelt.Blazor
 
         private readonly IJSRuntime JSRuntime;
 
+        private Task? ConstructDOMTask;
+
         private Task? LastTask;
 
         private Func<string, object[], ValueTask>? JSInvoker;
@@ -30,17 +33,18 @@ namespace Toolbelt.Blazor
         {
             this.Interceptor = interceptor;
             this.JSRuntime = jSRuntime;
-            interceptor.BeforeSend += this.Interceptor_BeforeSend;
+            interceptor.BeforeSendAsync += this.Interceptor_BeforeSendAsync;
             interceptor.AfterSend += this.Interceptor_AfterSend;
         }
 
-        private void Interceptor_BeforeSend(object? sender, EventArgs e) => this.BeginLoading();
+        private Task Interceptor_BeforeSendAsync(object? sender, EventArgs e) => this.BeginLoadingAsync();
 
         private void Interceptor_AfterSend(object? sender, EventArgs e) => this.EndLoading();
 
         internal void ConstructDOM()
         {
-            this.LastTask = this.ConstructDOMAsync();
+            this.ConstructDOMTask = this.ConstructDOMAsync();
+            this.LastTask = this.ConstructDOMTask;
         }
 
         private async Task ConstructDOMAsync()
@@ -68,7 +72,7 @@ namespace Toolbelt.Blazor
             this.JSInvoker = this.JSRuntime.InvokeVoidAsync;
 #endif
             var cssPath = "_content/Toolbelt.Blazor.LoadingBar/style.min.css";
-            await this.JSInvoker("Toolbelt.Blazor.loadingBar.constructDOM", new object[] { 
+            await this.JSInvoker("Toolbelt.Blazor.loadingBar.constructDOM", new object[] {
                 this.Options.LoadingBarColor,
                 this.Options.DisableStyleSheetAutoInjection ? "" : cssPath,
                 version,
@@ -79,8 +83,21 @@ namespace Toolbelt.Blazor
         /// <summary>
         /// Begin loading bar UI.
         /// </summary>
+        [Obsolete("Use BeginLoadingAsync instead."), EditorBrowsable(EditorBrowsableState.Never)]
         public void BeginLoading()
         {
+            var _ = this.BeginLoadingAsync();
+        }
+
+        /// <summary>
+        /// Begin loading bar UI.
+        /// </summary>
+        public async Task BeginLoadingAsync()
+        {
+            if (this.ConstructDOMTask != null && !this.ConstructDOMTask.IsCompleted)
+            {
+                await this.ConstructDOMTask;
+            }
             this.InvokeJS("beginLoading");
         }
 
@@ -94,7 +111,7 @@ namespace Toolbelt.Blazor
 
         private void InvokeJS(string methodName)
         {
-            if (JSInvoker == null) return;
+            if (this.JSInvoker == null) return;
             var task = this.LastTask ?? Task.CompletedTask;
             this.LastTask = task.ContinueWith(_ => this.JSInvoker("Toolbelt.Blazor.loadingBar." + methodName, Array.Empty<object>()));
         }
@@ -113,7 +130,7 @@ namespace Toolbelt.Blazor
         /// </summary>
         public void Dispose()
         {
-            this.Interceptor.BeforeSend -= this.Interceptor_BeforeSend;
+            this.Interceptor.BeforeSendAsync -= this.Interceptor_BeforeSendAsync;
             this.Interceptor.AfterSend -= this.Interceptor_AfterSend;
         }
 
