@@ -33,7 +33,8 @@
         constructor() {
         }
 
-        public constructDOM(barColor: string, cssPath: string, versionText: string, containerSelector: string | null | undefined): void {
+        public constructDOM(barColor: string, cssPath: string, versionText: string, containerSelector: string | null | undefined, latencyThreshold: number): void {
+            this.latencyThreshold = latencyThreshold;
             const doc = document;
 
             let cssAwaiter: Promise<void> | null = null;

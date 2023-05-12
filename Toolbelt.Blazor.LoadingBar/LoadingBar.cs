@@ -76,7 +76,8 @@ namespace Toolbelt.Blazor
                 this.Options.LoadingBarColor,
                 this.Options.DisableStyleSheetAutoInjection ? "" : cssPath,
                 version,
-                this.Options.ContainerSelector
+                this.Options.ContainerSelector,
+                this.Options.LatencyThreshold
             });
         }
 
