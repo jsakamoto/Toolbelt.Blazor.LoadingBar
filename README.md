@@ -19,8 +19,7 @@ The live demo site is here:
 "Blazor WebAssembly App (client-side) LoadingBar" ver.12.x or later supports Blazor WebAssembly App versions below.
 
 - .NET Core 3.1 / Blazor Wasm 3.2
-- .NET 5.0 
-- .NET 6.0 
+- .NET 5.0, 6.0, 7.0 or later
 
 ## How to install and use?
 
@@ -35,43 +34,35 @@ The live demo site is here:
 ```csharp
 using Toolbelt.Blazor.Extensions.DependencyInjection; // 👈 Open namespace, and...
 ...
-public class Program
-{
-  public static async Task Main(string[] args)
-  {
-    var builder = WebAssemblyHostBuilder.CreateDefault(args);
-    builder.RootComponents.Add<App>("app");
-    builder.Services.AddLoadingBar(); // 👈 register the service, and...
-    ...
-    builder.UseLoadingBar(); // 👈 declare construct loading bar UI.
-    ...
-    await builder.Build().RunAsync();
-    ...
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+builder.RootComponents.Add<App>("#app");
+builder.Services.AddLoadingBar(); // 👈 register the service, and...
+...
+builder.UseLoadingBar(); // 👈 declare construct loading bar UI.
+...
+await builder.Build().RunAsync();
+...
 ```
 
 **Step.3** Add invoking `EnableIntercept(IServiceProvider)` extension method at the registration of `HttpClient` to DI container.
 
 ```csharp
-public class Program
-{
-  public static async Task Main(string[] args)
-  {
-    ...
-    builder.Services.AddScoped(sp => new HttpClient { 
-      BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) 
-    }.EnableIntercept(sp)); // 👈 Add this!
-    ...
+...
+builder.Services.AddScoped(sp => new HttpClient { 
+  BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) 
+}.EnableIntercept(sp)); // 👈 Add this!
+...
 ```
 
 That's all.
 
-After doing those 3 step, you can see a loading bar effect on your Blazor application UI, during HttpClient request going on.
+After doing those 3 steps, you can see a loading bar effect on your Blazor application UI, during an HttpClient request going on.
 
 ### Configuration
 
 #### Configure the color of the loading bar
 
-If you want to customize the color of the loading bar, please call `AddLoadingBar()` with configuration action like this:
+If you want to customize the color of the loading bar, please call `AddLoadingBar()` with a configuration action like this:
 
 ```csharp
 builder.Services.AddLoadingBar(options =>
@@ -90,12 +81,23 @@ So you can change the color of the loading bar anytime by using JavaScript like 
 document.documentElement.style.setProperty('--toolbelt-loadingbar-color', '#ff00dc')
 ```
 
+#### Configure the threshold time for the loading bar will appear
+
+The threshold time to appearing the loading bar after sending an HTTP request is 100 msec by default. You can configure that threshold time by calling `AddLoadingBar()` with a configuration action like this:
+
+```csharp
+builder.Services.AddLoadingBar(options =>
+{
+  // Specify the threshold time for the loading bar will appear by msec.
+  options.LatencyThreshold = 200;
+});
+```
 
 #### Configure injection of CSS and JavaScript
 
 The calling of `AddLoadingBar()` and `UseLoadingBar()` injects the references of JavaScript file (.js) and style sheet file (.css) - which are bundled with this package - into your page automatically.
 
-If you don't want this behavior, you can disable these automatic injections, please call `AddLoadingBar()` with configuration action like this:
+If you don't want this behavior, you can disable these automatic injections, please call `AddLoadingBar()` with a configuration action like this:
 
 ```csharp
 builder.Services.AddLoadingBar(options =>
