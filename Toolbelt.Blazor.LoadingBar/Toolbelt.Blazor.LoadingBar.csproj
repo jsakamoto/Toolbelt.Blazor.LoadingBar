@@ -15,13 +15,15 @@
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(MSBuildProjectName).xml</DocumentationFile>
     <NoWarn>$(NoWarn);1591</NoWarn>
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
-    <Copyright>Copyright © 2018-2021 J.Sakamoto, Mozilla Public License 2.0</Copyright>
+    <Copyright>Copyright © 2018-2023 J.Sakamoto, Mozilla Public License 2.0</Copyright>
     <Authors>J.Sakamoto</Authors>
-    <Version>13.1.2</Version>
+    <Version>13.2.0</Version>
     <PackageLicenseExpression>MPL-2.0</PackageLicenseExpression>
     <PackageLicenseUrl></PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/</PackageProjectUrl>
-    <Description>Insert loading bar UI automatically into a client side Blazor application.</Description>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/jsakamoto/Toolbelt.Blazor.LoadingBar/</RepositoryUrl>
+    <Description>Insert loading bar UI automatically into a Blazor WebAssembly app.</Description>
     <PackageTags>blazor,loading,loadingbar,loading-bar</PackageTags>
     <PackageOutputPath>../_dist</PackageOutputPath>
     <PackageReleaseNotes>(Please write the package release notes in "../RELEASE-NOTES.txt")</PackageReleaseNotes>
@@ -46,18 +48,30 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard2.1' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="5.0.0" />
   </ItemGroup>
 
-  <Target Name="BuildPackageReleaseNotes" BeforeTargets="GenerateNuspec">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net6.0' ">
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net7.0' ">
+    <PackageReference Include="Microsoft.AspNetCore.Components" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.0" />
+  </ItemGroup>
+
+  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
     <ReadLinesFromFile File="../RELEASE-NOTES.txt">
       <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
     </ReadLinesFromFile>
     <PropertyGroup>
-      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a');v.0.0</PackageReleaseNotes>
       <PackageReleaseNotes>$([System.Text.RegularExpressions.Regex]::Match($(PackageReleaseNotes), "^(v\.[\d\.]+.+?)v\.[\d\.]+", System.Text.RegularExpressions.RegexOptions.Singleline).Groups[1].Value)</PackageReleaseNotes>
+      <PackageReleaseNotes>
+        $(PackageReleaseNotes)%0a%0aTo see all the change logs, please visit the following URL.%0a- $(RepositoryUrl)/blob/master/RELEASE-NOTES.txt</PackageReleaseNotes>
     </PropertyGroup>
   </Target>
 

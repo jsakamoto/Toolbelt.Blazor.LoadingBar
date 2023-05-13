@@ -1,3 +1,6 @@
+v.13.2.0
+- Improve: Add the option to configure the threshold time for the loading bar will appear.
+
 v.13.1.2
 - Fix: The loading bar doesn't appear in some cases.
 
