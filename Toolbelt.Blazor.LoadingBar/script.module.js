@@ -17,7 +17,8 @@ export var Toolbelt;
                 this.incrementTimer = { handle: null };
                 this.completeTimer = { handle: null };
             }
-            constructDOM(barColor, cssPath, versionText, containerSelector) {
+            constructDOM(barColor, cssPath, versionText, containerSelector, latencyThreshold) {
+                this.latencyThreshold = latencyThreshold;
                 const doc = document;
                 let cssAwaiter = null;
                 if (cssPath !== '') {

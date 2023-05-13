@@ -24,5 +24,10 @@
         /// Get or set the selector of the container what the loading bar contents inject into.
         /// </summary>
         public string ContainerSelector { get; set; } = "body";
+
+        /// <summary>
+        /// Get or set the threshold for the duration of requests (in ms) that causes apparition of loading bar.
+        /// </summary>
+        public int LatencyThreshold { get; set; } = 100;
     }
 }
