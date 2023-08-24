@@ -46,7 +46,7 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         ///  Installs a LoadingBar service to the runtime hosting environment.
         /// </summary>
         /// <param name="host">The Microsoft.AspNetCore.Blazor.Hosting.WebAssemblyHost.</param>
-        [Obsolete("Use \"builder.UserLoadingBar();\" instead.")]
+        [Obsolete("Use \"builder.UseLoadingBar();\" instead.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static WebAssemblyHost UseLoadingBar(this WebAssemblyHost host)
         {
