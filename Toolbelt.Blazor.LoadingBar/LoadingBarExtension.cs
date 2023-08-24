@@ -16,9 +16,9 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         ///  Adds a LoadingBar service to the specified Microsoft.Extensions.DependencyInjection.IServiceCollection.
         /// </summary>
         /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the service to.</param>
-        public static void AddLoadingBar(this IServiceCollection services)
+        public static IServiceCollection AddLoadingBar(this IServiceCollection services)
         {
-            services.AddLoadingBar(configure: null);
+            return services.AddLoadingBar(configure: null);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the service to.</param>
         /// <param name="configure"></param>
-        public static void AddLoadingBar(this IServiceCollection services, Action<LoadingBarOptions>? configure)
+        public static IServiceCollection AddLoadingBar(this IServiceCollection services, Action<LoadingBarOptions>? configure)
         {
             services.AddHttpClientInterceptor();
             services.TryAddSingleton(sp =>
@@ -37,6 +37,7 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
                 configure?.Invoke(loadingBar.Options);
                 return loadingBar;
             });
+            return services;
         }
 
         private static bool Installed;
