@@ -29,14 +29,14 @@ The live demo site is here:
 > dotnet add package Toolbelt.Blazor.LoadingBar
 ```
 
-**Step.2** Register "LoadingBar" service into the DI container, and declare construct loading bar UI, at `Main()` method in the `Program` class of your Blazor application.
+**Step.2** Register the "LoadingBar" service into the DI container, and declare the construct loading bar UI at the startup of your Blazor WebAssembly application (usually, you will need to do it in the "Program.cs").
 
 ```csharp
 using Toolbelt.Blazor.Extensions.DependencyInjection; // 👈 Open namespace, and...
 ...
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
-builder.Services.AddLoadingBar(); // 👈 register the service, and...
+builder.Services.AddLoadingBarService(); // 👈 register the service, and...
 ...
 builder.UseLoadingBar(); // 👈 declare construct loading bar UI.
 ...
@@ -62,10 +62,10 @@ After doing those 3 steps, you can see a loading bar effect on your Blazor appli
 
 #### Configure the color of the loading bar
 
-If you want to customize the color of the loading bar, please call `AddLoadingBar()` with a configuration action like this:
+If you want to customize the color of the loading bar, please call `AddLoadingBarService()` with a configuration action like this:
 
 ```csharp
-builder.Services.AddLoadingBar(options =>
+builder.Services.AddLoadingBarService(options =>
 {
   // Specify the color of the loading bar
   // by CSS color descriptor.
@@ -83,10 +83,10 @@ document.documentElement.style.setProperty('--toolbelt-loadingbar-color', '#ff00
 
 #### Configure the threshold time for the loading bar will appear
 
-The threshold time to appearing the loading bar after sending an HTTP request is 100 msec by default. You can configure that threshold time by calling `AddLoadingBar()` with a configuration action like this:
+The threshold time to appearing the loading bar after sending an HTTP request is 100 msec by default. You can configure that threshold time by calling `AddLoadingBarService()` with a configuration action like this:
 
 ```csharp
-builder.Services.AddLoadingBar(options =>
+builder.Services.AddLoadingBarService(options =>
 {
   // Specify the threshold time for the loading bar will appear by msec.
   options.LatencyThreshold = 200;
@@ -95,12 +95,12 @@ builder.Services.AddLoadingBar(options =>
 
 #### Configure injection of CSS and JavaScript
 
-The calling of `AddLoadingBar()` and `UseLoadingBar()` injects the references of JavaScript file (.js) and style sheet file (.css) - which are bundled with this package - into your page automatically.
+The calling of `AddLoadingBarService()` and `UseLoadingBar()` injects the references of JavaScript file (.js) and style sheet file (.css) - which are bundled with this package - into your page automatically.
 
-If you don't want this behavior, you can disable these automatic injections, please call `AddLoadingBar()` with a configuration action like this:
+If you don't want this behavior, you can disable these automatic injections, please call `AddLoadingBarService()` with a configuration action like this:
 
 ```csharp
-builder.Services.AddLoadingBar(options =>
+builder.Services.AddLoadingBarService(options =>
 {
   // If you don't want automatic injection of js file, add below;
   options.DisableClientScriptAutoInjection = true;
@@ -122,7 +122,7 @@ By default, the "Loading bar" injects its DOM contents to the inside of the body
 If you want to specify the element where the "Loading Bar" 's contents are injected, you can do that by setting a query selector to the `ContainerSelector` option, like this.
 
 ```csharp
-builder.Services.AddLoadingBar(options =>
+builder.Services.AddLoadingBarService(options =>
 {
   options.ContainerSelector = "#selector-of-container";
 });
