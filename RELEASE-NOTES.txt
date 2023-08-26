@@ -1,3 +1,7 @@
+v.14.0.0
+- Improve: The new AddLoadingBarService() extension method is released that doesn't break the service registration method chain since it returns IServiceCollection.
+- Improve: Assembly trimming is enabled.
+
 v.13.2.0
 - Improve: Add the option to configure the threshold time for the loading bar will appear.
 
