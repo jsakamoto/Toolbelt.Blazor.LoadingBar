@@ -16,7 +16,7 @@ namespace SampleSite.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
-            builder.Services.AddLoadingBar(options =>
+            builder.Services.AddLoadingBarService(options =>
             {
                 options.LoadingBarColor = "yellow";
                 options.LatencyThreshold = 100;

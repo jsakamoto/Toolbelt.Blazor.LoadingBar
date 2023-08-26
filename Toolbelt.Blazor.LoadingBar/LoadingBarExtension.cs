@@ -16,9 +16,9 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         ///  Adds a LoadingBar service to the specified Microsoft.Extensions.DependencyInjection.IServiceCollection.
         /// </summary>
         /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the service to.</param>
-        public static IServiceCollection AddLoadingBar(this IServiceCollection services)
+        public static IServiceCollection AddLoadingBarService(this IServiceCollection services)
         {
-            return services.AddLoadingBar(configure: null);
+            return services.AddLoadingBarService(configure: null);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The Microsoft.Extensions.DependencyInjection.IServiceCollection to add the service to.</param>
         /// <param name="configure"></param>
-        public static IServiceCollection AddLoadingBar(this IServiceCollection services, Action<LoadingBarOptions>? configure)
+        public static IServiceCollection AddLoadingBarService(this IServiceCollection services, Action<LoadingBarOptions>? configure)
         {
             services.AddHttpClientInterceptor();
             services.TryAddSingleton(sp =>
@@ -39,6 +39,12 @@ namespace Toolbelt.Blazor.Extensions.DependencyInjection
             });
             return services;
         }
+
+        [Obsolete("Use \"services.AddLoadingBarService();\" instead."), EditorBrowsable(EditorBrowsableState.Never)]
+        public static void AddLoadingBar(this IServiceCollection services) => services.AddLoadingBarService(configure: null);
+
+        [Obsolete("Use \"services.AddLoadingBarService();\" instead."), EditorBrowsable(EditorBrowsableState.Never)]
+        public static void AddLoadingBar(this IServiceCollection services, Action<LoadingBarOptions>? configure) => services.AddLoadingBarService(configure);
 
         private static bool Installed;
 
