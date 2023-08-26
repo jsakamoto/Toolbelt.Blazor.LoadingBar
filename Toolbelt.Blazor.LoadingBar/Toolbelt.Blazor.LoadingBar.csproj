@@ -29,6 +29,7 @@
     <PackageReleaseNotes>(Please write the package release notes in "../RELEASE-NOTES.txt")</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <DefineConstants Condition=" '$(TargetFramework)' != 'netstandard2.1' ">$(DefineConstants);ENABLE_JSMODULE</DefineConstants>
+    <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
 
   <ItemGroup>
