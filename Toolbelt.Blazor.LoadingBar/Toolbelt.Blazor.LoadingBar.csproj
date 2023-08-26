@@ -39,7 +39,7 @@
 
   <ItemGroup>
     <PackageReference Include="Toolbelt.Blazor.HttpClientInterceptor" Version="10.0.0" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.9.7">
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="5.2.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
